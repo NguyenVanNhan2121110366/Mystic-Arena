@@ -6,16 +6,21 @@ public class Scroller : MonoBehaviour
 {
     [SerializeField] private RawImage rawImage;
     [SerializeField] private float posX, posY;
-    [SerializeField] private bool isCheck;
+
+    private void Start()
+    {
+        StartCoroutine(this.SwitchX());
+        StartCoroutine(this.SwitchY());
+    }
 
     // Update is called once per frame
     void Update()
     {
-        rawImage.uvRect = new Rect(rawImage.uvRect.position + new Vector2(posX, posY) * Time.deltaTime*1, rawImage.uvRect.size);
-        StartCoroutine(this.Switch());
+        rawImage.uvRect = new Rect(rawImage.uvRect.position + new Vector2(posX, posY) * Time.deltaTime * 0.5f, rawImage.uvRect.size);
+
     }
 
-    private IEnumerator Switch()
+    private IEnumerator SwitchY()
     {
         while (true)
         {
@@ -28,8 +33,27 @@ public class Scroller : MonoBehaviour
 
             if (posY == -0.01f)
             {
-                yield return new WaitForSeconds(3f);
+                yield return new WaitForSeconds(2.8f);
                 posY = 0.01f;
+            }
+        }
+    }
+
+    private IEnumerator SwitchX()
+    {
+        while (true)
+        {
+
+            if (posX == 0.01f)
+            {
+                yield return new WaitForSeconds(6f);
+                posX = -0.01f;
+            }
+
+            if (posX == -0.01f)
+            {
+                yield return new WaitForSeconds(6f);
+                posX = 0.01f;
             }
         }
     }
