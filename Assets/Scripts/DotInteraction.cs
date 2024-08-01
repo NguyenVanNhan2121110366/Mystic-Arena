@@ -34,43 +34,47 @@ public class DotInteraction : MonoBehaviour
     {
         targetX = column;
         targetY = row;
-        this.MoveDot();
         this.Find3Matched();
+        this.MoveDot();
+
+
     }
 
-    private void Find3Matched()
+
+    public void Find3Matched()
     {
-        if (column + 1 < this.alldots.Width && column - 1 < 0)
+        if (column + 1 < this.alldots.Width && column - 1 >= 0)
         {
             var leftDot = this.alldots.AllDots[column - 1, row];
             var rightDot = this.alldots.AllDots[column + 1, row];
-            if (leftDot && rightDot && leftDot.CompareTag(gameObject.tag) && rightDot.CompareTag(gameObject.tag))
+            if (leftDot && rightDot && leftDot.CompareTag(gameObject.tag) && rightDot.CompareTag(gameObject.tag) && leftDot != gameObject && rightDot != gameObject)
             {
                 isMatched = true;
-                leftDot.GetComponent<DotInteraction>().isMatched = true;
-                rightDot.GetComponent<DotInteraction>().isMatched = true;
+                leftDot.GetComponent<DotInteraction>().IsMatched = true;
+                rightDot.GetComponent<DotInteraction>().IsMatched = true;
             }
         }
 
-        if (row + 1 < this.alldots.Height && row - 1 < 0)
+        if (row + 1 < this.alldots.Height && row - 1 >= 0)
         {
             var upDot = this.alldots.AllDots[column, row - 1];
-            var downDot = this.alldots.AllDots[column, row = 1];
-            if (upDot && downDot && upDot.CompareTag(gameObject.tag) && downDot.CompareTag(gameObject.tag))
+            var downDot = this.alldots.AllDots[column, row + 1];
+            if (upDot && downDot && upDot.CompareTag(gameObject.tag) && downDot.CompareTag(gameObject.tag) && upDot != gameObject && downDot != gameObject)
             {
                 isMatched = true;
-                upDot.GetComponent<DotInteraction>().isMatched = true;
-                downDot.GetComponent<DotInteraction>().isMatched = true;
+                upDot.GetComponent<DotInteraction>().IsMatched = true;
+                downDot.GetComponent<DotInteraction>().IsMatched = true;
             }
         }
     }
+
 
     private void MoveDot()
     {
         if (Mathf.Abs(targetX - transform.position.x) > 0.1f)
         {
             var pos = new Vector2(targetX, transform.position.y);
-            transform.position = Vector2.Lerp(transform.position, pos, 6 * Time.deltaTime);
+            transform.position = Vector2.Lerp(transform.position, pos, 9 * Time.deltaTime);
             if (this.alldots.AllDots[column, row] != gameObject)
             {
                 this.alldots.AllDots[column, row] = gameObject;
@@ -85,7 +89,7 @@ public class DotInteraction : MonoBehaviour
         if (Mathf.Abs(targetY - transform.position.y) > 0.1f)
         {
             var pos = new Vector2(transform.position.x, targetY);
-            transform.position = Vector2.Lerp(transform.position, pos, 6 * Time.deltaTime);
+            transform.position = Vector2.Lerp(transform.position, pos, 9 * Time.deltaTime);
             if (this.alldots.AllDots[column, row] != gameObject)
             {
                 this.alldots.AllDots[column, row] = gameObject;
@@ -107,7 +111,7 @@ public class DotInteraction : MonoBehaviour
         }
         else
         {
-
+            yield return null;
             if (!isMatched && !this.targetDot.GetComponent<DotInteraction>().isMatched)
             {
                 yield return new WaitForSeconds(0.5f);
@@ -119,10 +123,10 @@ public class DotInteraction : MonoBehaviour
             else
             {
                 GameStateController.Instance.CurrentGameState = GameState.FillingDot;
+                StartCoroutine(this.alldots.DestroyMatched());
                 Debug.Log("Destroy");
             }
             targetDot = null;
-
 
         }
     }

@@ -43,7 +43,7 @@ public class AllDotController : MonoBehaviour
 
     }
 
-    
+
 
     private IEnumerator CreateDotAndGrid()
     {
@@ -80,15 +80,16 @@ public class AllDotController : MonoBehaviour
                         dotObj.transform.parent = transform;
                         dotObj.name = "(" + i + " , " + j + ")";
                         dotObj.SetActive(true);
-                        this.allDots[i, j] = dotObj;
                         dotObj.GetComponent<DotInteraction>().Column = i;
                         dotObj.GetComponent<DotInteraction>().Row = j;
+                        this.allDots[i, j] = dotObj;
                         break;
                     }
                 }
 
             }
         }
+        StartCoroutine(this.ReduceCoRo());
     }
 
     private int DotToUse()
@@ -115,4 +116,109 @@ public class AllDotController : MonoBehaviour
             numberIndex = 8;
         return numberIndex;
     }
+    #region Destroy Matched
+    private void DestroyMatchedAt(int column, int row)
+    {
+        if (this.allDots[column, row].GetComponent<DotInteraction>().IsMatched)
+        {
+            Destroy(this.allDots[column, row]);
+            this.allDots[column, row] = null;
+        }
+    }
+
+    public IEnumerator DestroyMatched()
+    {
+        yield return new WaitForSeconds(0.5f);
+        for (var i = 0; i < this.width; i++)
+        {
+            for (var j = 0; j < this.height; j++)
+            {
+                if (this.allDots[i, j] != null)
+                {
+                    this.DestroyMatchedAt(i, j);
+                }
+            }
+        }
+        StartCoroutine(MakeFallingDot());
+    }
+
+    private IEnumerator MakeFallingDot()
+    {
+        yield return new WaitForSeconds(0.2f);
+        var countRow = 0;
+        for (var i = 0; i < this.width; i++)
+        {
+            for (var j = 0; j < this.height; j++)
+            {
+                if (!this.allDots[i, j]) countRow++;
+                else if (countRow > 0)
+                {
+                    this.allDots[i, j].GetComponent<DotInteraction>().Row -= countRow;
+                    this.allDots[i, j] = null;
+                }
+            }
+            countRow = 0;
+        }
+        //yield return null;
+        StartCoroutine(ReduceCoRo());
+    }
+
+    private IEnumerator SpawnAgain()
+    {
+        yield return new WaitForSeconds(0.2f);
+        for (var i = 0; i < this.width; i++)
+        {
+            for (var j = 0; j < this.height; j++)
+            {
+                if (this.allDots[i, j] == null)
+                {
+                    var pos = new Vector2(i, j + 1);
+                    var dotToUse = DotToUse();
+                    var dotObj = Instantiate(this.dots[dotToUse], pos, Quaternion.identity);
+                    dotObj.transform.parent = transform;
+                    dotObj.SetActive(true);
+                    dotObj.name = "(" + i + " , " + j + ")";
+                    dotObj.GetComponent<DotInteraction>().Column = i;
+                    dotObj.GetComponent<DotInteraction>().Row = j;
+                    this.allDots[i, j] = dotObj;
+                }
+            }
+        }
+    }
+
+    private bool IsCheckMached()
+    {
+        for (var i = 0; i < this.width; i++)
+        {
+            for (var j = 0; j < this.height; j++)
+            {
+                if (this.allDots[i, j] != null && this.allDots[i, j].GetComponent<DotInteraction>().IsMatched)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public IEnumerator ReduceCoRo()
+    {
+        StartCoroutine(this.SpawnAgain());
+        yield return new WaitForSeconds(0.3f);
+        if (IsCheckMached())
+        {
+            yield return null;
+            StartCoroutine(DestroyMatched());
+        }
+        if (GameStateController.Instance.CurrentGameState == GameState.None)
+        {
+            yield return null;
+            GameStateController.Instance.CurrentGameState = GameState.Swipe;
+        }
+        if (GameStateController.Instance.CurrentGameState == GameState.FillingDot)
+        {
+            GameStateController.Instance.CurrentGameState = GameState.Finish;
+        }
+    }
+    #endregion
 }

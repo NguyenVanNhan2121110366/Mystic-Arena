@@ -26,7 +26,11 @@ public class GameStateController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (currentGameState == GameState.Finish)
+        {
+            currentGameState = GameState.Swipe;
+            
+        }
     }
 }
 public enum GameState
