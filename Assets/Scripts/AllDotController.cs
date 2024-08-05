@@ -10,6 +10,7 @@ public class AllDotController : MonoBehaviour
     [SerializeField] private GameObject girdPrefab;
     private GameObject[,] allGrids;
     private GameObject[,] allDots;
+    private ScoreController scoreController;
     #endregion
     #region Public
     public int Width { get => width; set => width = value; }
@@ -18,7 +19,10 @@ public class AllDotController : MonoBehaviour
     public GameObject[,] AllGrids { get => allGrids; set => allGrids = value; }
     #endregion
 
-
+    private void Awake()
+    {
+        this.scoreController = FindFirstObjectByType<ScoreController>();
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -112,7 +116,7 @@ public class AllDotController : MonoBehaviour
             numberIndex = 6;
         else if (randomNumber >= 97 && randomNumber < 99)
             numberIndex = 7;
-        else    
+        else
             numberIndex = 8;
         return numberIndex;
     }
@@ -217,7 +221,12 @@ public class AllDotController : MonoBehaviour
         }
         if (GameStateController.Instance.CurrentGameState == GameState.FillingDot)
         {
-            GameStateController.Instance.CurrentGameState = GameState.Finish;
+            this.scoreController.UpdateScore();
+            if (GameStateController.Instance.CurrentGameState == GameState.FillingDot)
+            {
+                GameStateController.Instance.CurrentGameState = GameState.Finish;
+            }
+
         }
     }
     #endregion

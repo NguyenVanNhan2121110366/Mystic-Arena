@@ -17,7 +17,8 @@ public class Player : Character
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        CurrentScoreHeal = MaxScoreHeal;
+        CurrentScoreMana = 50f;
     }
 
     // Update is called once per frame
