@@ -104,15 +104,15 @@ public class AllDotController : MonoBehaviour
             numberIndex = 2;
         else if (randomNumber >= 61 && randomNumber < 80)
             numberIndex = 3;
-        else if (randomNumber >= 80 && randomNumber < 97)
+        else if (randomNumber >= 80 && randomNumber < 93)
             numberIndex = 4;
-        else if (randomNumber >= 97 && randomNumber < 98)
+        else if (randomNumber >= 93 && randomNumber < 95)
             numberIndex = 5;
-        else if (randomNumber >= 98 && randomNumber < 99)
+        else if (randomNumber >= 95 && randomNumber < 97)
             numberIndex = 6;
-        else if (randomNumber >= 99 && randomNumber < 100)
+        else if (randomNumber >= 97 && randomNumber < 99)
             numberIndex = 7;
-        else
+        else    
             numberIndex = 8;
         return numberIndex;
     }

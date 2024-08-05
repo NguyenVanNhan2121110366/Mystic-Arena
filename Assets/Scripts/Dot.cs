@@ -30,15 +30,16 @@ public class Dot : MonoBehaviour
 
     private void DestroyBig()
     {
-        var dot = FindFirstObjectByType<DotInteraction>();
+        var dot = GetComponent<DotInteraction>();
         var column = dot.Column;
         var row = dot.Row;
         for (var i = -1; i < 2; i++)
         {
             for (var j = -1; j < 2; j++)
             {
-                if (column + i < this.alldots.Width && column + i >= 0 && row + j >= 0 && row + j < this.alldots.Height && this.alldots.AllDots[column + i, row + j] != null
-                )
+                if (column + i < this.alldots.Width && column + i >= 0 &&
+                 row + j >= 0 && row + j < this.alldots.Height && 
+                 this.alldots.AllDots[column + i, row + j] != null)
                 {
                     Destroy(this.alldots.AllDots[column + i, row + j]);
                     this.alldots.AllDots[column + i, row + j] = null;
@@ -47,4 +48,5 @@ public class Dot : MonoBehaviour
             }
         }
     }
+    
 }
