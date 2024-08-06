@@ -35,19 +35,19 @@ public class Dot : MonoBehaviour
         }
         if (dotTag == "Gold")
         {
-            this.scoreController.ScoreHeal += this.score;
+            this.scoreController.ScoreGold += this.score;
         }
         if (dotTag == "Mana")
         {
-            this.scoreController.ScoreHeal += this.score;
+            this.scoreController.ScoreMana += this.score;
         }
         if (dotTag == "Shield")
         {
-            this.scoreController.ScoreHeal += this.score;
+            this.scoreController.ScoreShield += this.score;
         }
         if (dotTag == "Sword")
         {
-            this.scoreController.ScoreHeal += this.score;
+            this.scoreController.ScoreAttack += this.score;
         }
     }
 

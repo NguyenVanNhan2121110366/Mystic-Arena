@@ -211,23 +211,26 @@ public class AllDotController : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         if (IsCheckMached())
         {
-            yield return null;
             StartCoroutine(DestroyMatched());
         }
-        if (GameStateController.Instance.CurrentGameState == GameState.None)
+        else
         {
-            yield return null;
-            GameStateController.Instance.CurrentGameState = GameState.Swipe;
-        }
-        if (GameStateController.Instance.CurrentGameState == GameState.FillingDot)
-        {
-            this.scoreController.UpdateScore();
+            if (GameStateController.Instance.CurrentGameState == GameState.None)
+            {
+                yield return null;
+                GameStateController.Instance.CurrentGameState = GameState.Swipe;
+            }
             if (GameStateController.Instance.CurrentGameState == GameState.FillingDot)
             {
-                GameStateController.Instance.CurrentGameState = GameState.Finish;
-            }
+                this.scoreController.UpdateScore();
+                if (GameStateController.Instance.CurrentGameState == GameState.FillingDot)
+                {
+                    GameStateController.Instance.CurrentGameState = GameState.Finish;
+                }
 
+            }
         }
+
     }
     #endregion
 }

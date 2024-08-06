@@ -16,7 +16,12 @@ public class GameStateController : MonoBehaviour
     }
 
     [SerializeField] private GameState currentGameState;
+    private ScoreController scoreController;
     public GameState CurrentGameState { get => currentGameState; set => currentGameState = value; }
+    private void Awake()
+    {
+        this.scoreController = FindFirstObjectByType<ScoreController>();
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -28,8 +33,8 @@ public class GameStateController : MonoBehaviour
     {
         if (currentGameState == GameState.Finish)
         {
+            this.scoreController.ResetScore();
             currentGameState = GameState.Swipe;
-            
         }
     }
 }

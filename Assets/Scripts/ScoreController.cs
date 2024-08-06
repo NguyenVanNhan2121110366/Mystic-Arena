@@ -25,7 +25,15 @@ public class ScoreController : MonoBehaviour
     }
     public void UpdateScore()
     {
-        Player.Instance.UpdateScore();
+        Player.Instance.UpdateScorePlayer();
         Player.Instance.UpdateScoreBar();
+    }
+    public void ResetScore()
+    {
+        scoreHeal = 0;
+        scoreMana = 0;
+        scoreAttack = 0;
+        scoreGold = 0;
+        scoreShield = 0;
     }
 }

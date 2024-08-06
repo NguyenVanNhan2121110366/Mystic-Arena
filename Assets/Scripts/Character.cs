@@ -20,7 +20,7 @@ public class Character : MonoBehaviour
     [SerializeField] private float maxScoreShield;
     [SerializeField] private Image healBar;
     [SerializeField] private Image manaBar;
-    ScoreController scoreController;
+    public Animator animator;
 
     #endregion
 
@@ -41,17 +41,6 @@ public class Character : MonoBehaviour
     public float MaxScoreGold { get => maxScoreGold; set => maxScoreGold = value; }
     public float MaxScoreShield { get => maxScoreShield; set => maxScoreShield = value; }
     #endregion
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        this.scoreController = FindFirstObjectByType<ScoreController>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     protected void UpdateBar()
     {
@@ -72,13 +61,14 @@ public class Character : MonoBehaviour
         currentScoreMana = currentScoreMana < 0 ? 0 : currentScoreMana;
     }
 
-    public void UpdateScore()
+    public virtual void UpdateScorePlayer()
     {
-        scoreHeal = this.scoreController.ScoreHeal;
-        scoreMana = this.scoreController.ScoreMana;
-        scoreAttack = this.scoreController.ScoreAttack;
-        scoreGold = this.scoreController.ScoreGold;
-        scoreShield = this.scoreController.ScoreShield;
+
+    }
+
+    public virtual void Attacking()
+    {
+
     }
 
 
