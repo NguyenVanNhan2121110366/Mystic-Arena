@@ -18,8 +18,9 @@ public class Character : MonoBehaviour
     [SerializeField] private float maxScoreAttack;
     [SerializeField] private float maxScoreGold;
     [SerializeField] private float maxScoreShield;
-    [SerializeField] private Image healBar;
-    [SerializeField] private Image manaBar;
+    public Image healBar;
+    public Image manaBar;
+    public Image shieldBar;
     public Animator animator;
 
     #endregion
@@ -46,6 +47,7 @@ public class Character : MonoBehaviour
     {
         healBar.fillAmount = Mathf.Lerp(healBar.fillAmount, currentScoreHeal / maxScoreHeal, 9 * Time.deltaTime);
         manaBar.fillAmount = Mathf.Lerp(manaBar.fillAmount, currentScoreMana / maxScoreMana, 9 * Time.deltaTime);
+        shieldBar.fillAmount = Mathf.Lerp(shieldBar.fillAmount, currentScoreShield / maxScoreShield, 9 * Time.deltaTime);
     }
 
     public void UpdateScoreBar()
@@ -57,8 +59,11 @@ public class Character : MonoBehaviour
         currentScoreShield += scoreShield;
         currentScoreHeal = currentScoreHeal > maxScoreHeal ? maxScoreHeal : currentScoreHeal;
         currentScoreMana = currentScoreMana > maxScoreMana ? maxScoreMana : currentScoreMana;
+        currentScoreShield = currentScoreShield > maxScoreShield ? maxScoreShield : currentScoreShield;
         currentScoreHeal = currentScoreHeal < 0 ? 0 : currentScoreHeal;
         currentScoreMana = currentScoreMana < 0 ? 0 : currentScoreMana;
+        currentScoreShield = currentScoreShield < 0 ? 0 : currentScoreShield;
+
     }
 
     public virtual void UpdateScorePlayer()

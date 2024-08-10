@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class Player : Character
 {
     private static Player instance;
@@ -24,17 +24,21 @@ public class Player : Character
     [SerializeField] private GameObject attackRate;
     [SerializeField] private Quaternion rotationPlayer;
     [SerializeField] private Vector2 posPlayer;
-
+    public bool IsMoving { get => isMoving; set => isMoving = value; }
     private void Awake()
     {
         this.scoreController = FindFirstObjectByType<ScoreController>();
         this.animator = GetComponent<Animator>();
+        this.shieldBar = GameObject.Find("ShieldBarPlayer").GetComponent<Image>();
+        this.healBar = GameObject.Find("HealBarPlayer").GetComponent<Image>();
+        this.manaBar = GameObject.Find("ManaBarPlayer").GetComponent<Image>();
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         CurrentScoreHeal = MaxScoreHeal;
         CurrentScoreMana = 50f;
+        CurrentScoreShield = 0f;
         this.rotationPlayer = transform.rotation;
         this.posPlayer = transform.position;
     }
@@ -59,9 +63,10 @@ public class Player : Character
     public override void Attacking()
     {
         base.Attacking();
-        if (TurnController.Instance.CurrentTurn == GameTurn.Player)
+        if (TurnController.Instance.CurrentTurn == GameTurn.Player && GameStateController.Instance.CurrentGameState == GameState.Attacking)
         {
-            if (this.isMoving)
+            this.isIdle = false;
+            if (this.isMoving && !isAttack && !isBackToBase)
             {
                 this.isIdle = false;
                 transform.position = Vector2.Lerp(transform.position, targetEnemy.position, 9 * Time.deltaTime);
@@ -71,36 +76,43 @@ public class Player : Character
                     this.isAttack = true;
                 }
             }
-            else if (this.isAttack)
+            if (this.isAttack)
             {
                 this.attackRate.SetActive(true);
                 StartCoroutine(this.DelayAttack());
             }
-            else if (this.isBackToBase)
+            if (this.isBackToBase)
             {
                 transform.rotation = Quaternion.Euler(0, 180, 0);
-                transform.position = posPlayer;
+                transform.position = Vector2.Lerp(transform.position, posPlayer, 9 * Time.deltaTime);
                 if (Vector2.Distance(transform.position, posPlayer) <= 0.1f)
                 {
+                    isBackToBase = false;
+
                     transform.rotation = rotationPlayer;
                     GameStateController.Instance.CurrentGameState = GameState.FillingDot;
-                    
                 }
             }
         }
         else
         {
-
+            isMoving = false;
+            isIdle = true;
+            isAttack = false;
+            isBackToBase = false;
+            isMoving = false;
         }
         this.animator.SetBool("Idle", this.isIdle);
         this.animator.SetBool("Moving", this.isMoving);
         this.animator.SetBool("Attack", this.isAttack);
+        this.animator.SetBool("BackToBase", this.isBackToBase);
     }
 
     private IEnumerator DelayAttack()
     {
         yield return new WaitForSeconds(0.5f);
         this.isAttack = false;
+        this.isIdle = true;
         this.isBackToBase = true;
         this.attackRate.SetActive(false);
     }

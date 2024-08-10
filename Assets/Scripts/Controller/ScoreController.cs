@@ -7,6 +7,7 @@ public class ScoreController : MonoBehaviour
     [SerializeField] private float scoreAttack;
     [SerializeField] private float scoreGold;
     [SerializeField] private float scoreShield;
+    [SerializeField] private float scoreLevel;
     public float ScoreHeal { get => scoreHeal; set => scoreHeal = value; }
     public float ScoreMana { get => scoreMana; set => scoreMana = value; }
     public float ScoreAttack { get => scoreAttack; set => scoreAttack = value; }
@@ -27,6 +28,11 @@ public class ScoreController : MonoBehaviour
     {
         Player.Instance.UpdateScorePlayer();
         Player.Instance.UpdateScoreBar();
+        if (Player.Instance.ScoreAttack > 0)
+        {
+            GameStateController.Instance.CurrentGameState = GameState.Attacking;
+            Player.Instance.IsMoving = true;
+        }
     }
     public void ResetScore()
     {
