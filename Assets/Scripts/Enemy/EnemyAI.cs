@@ -63,7 +63,8 @@ public class EnemyAI : MonoBehaviour
             for (var j = 0; j < this.allDot.Height; j++)
             {
                 var isOrigin = FindMatchedOriginDot(i, j);
-                if (isOrigin)
+                var isTarget = FindMatchedTargetDot(i + 1, j);
+                if (isOrigin || isTarget)
                 {
                     var newMove = new MoveDot(i, j, i + 1, j);
                     this.allMoves.Add(newMove);
@@ -79,7 +80,27 @@ public class EnemyAI : MonoBehaviour
         var b = FindMatchedVertical(i, j, 1);
         return IsMatched(a, b);
     }
+    private bool FindMatchedTargetDot(int i, int j)
+    {
+        var a = FindMatchedLeftHorizontal(i, j);
+        var b = FindMatchedVertical(i, j, -1);
+        return IsMatched(a, b);
+    }
 
+    private bool FindMatchedLeftHorizontal(int i, int j)
+    {
+        var count = 0;
+        var dot = this.allTags[i, j];
+        var leftDot = i - 2 > 0 ? this.allTags[i - 2, j] : string.Empty;
+        var leftDot2 = i - 3 >= 0 ? this.allTags[i - 3, j] : string.Empty;
+        if (dot == leftDot)
+        {
+            count++;
+            if (dot == leftDot2)
+                count++;
+        }
+        return Find3Matched(count);
+    }
     private bool FindMatchedRightHorizontal(int i, int j)
     {
         var count = 1;
