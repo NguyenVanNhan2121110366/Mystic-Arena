@@ -215,5 +215,11 @@ public class DotInteraction : MonoBehaviour
         preRow = row;
     }
 
+    public void SetDot(int column, int row)
+    {
+        this.column = column;
+        this.row = row;
+    }
+
 
 }

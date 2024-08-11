@@ -1557,6 +1557,7 @@ GameObject:
   - component: {fileID: 776588759}
   - component: {fileID: 776588763}
   - component: {fileID: 776588764}
+  - component: {fileID: 776588765}
   m_Layer: 0
   m_Name: EnemyPig
   m_TagString: Untagged
@@ -1617,6 +1618,11 @@ MonoBehaviour:
   manaBar: {fileID: 0}
   shieldBar: {fileID: 0}
   animator: {fileID: 0}
+  isMoving: 0
+  targetEnemy: {fileID: 0}
+  attackRate: {fileID: 0}
+  rotationPlayer: {x: 0, y: 0, z: 0, w: 0}
+  posPlayer: {x: 0, y: 0}
 --- !u!212 &776588761
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1760,6 +1766,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &776588765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 776588758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d11517c1411fa24ebd89fef4dcb7655, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allDots: {fileID: 0}
+  allMoves: []
+  isTurnEnemy: 0
 --- !u!1 &796810596
 GameObject:
   m_ObjectHideFlags: 0
