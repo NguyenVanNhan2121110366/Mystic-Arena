@@ -22,12 +22,13 @@ public class EnemyAI : MonoBehaviour
 
     private void Update()
     {
-        if (isTurnEnemy)
+        if (isTurnEnemy && TurnController.Instance.CurrentTurn == GameTurn.Enemy)
         {
             this.allMoves.Clear();
             this.GetAllTag();
             StartCoroutine(this.RandomMoveDot());
             this.FindAllMatchedWidth();
+            this.FindAllMatchedHeight();
             this.isTurnEnemy = false;
         }
     }
@@ -139,6 +140,97 @@ public class EnemyAI : MonoBehaviour
         }
         return Find3Matched(count);
     }
+
+    #endregion
+
+    private void FindAllMatchedHeight()
+    {
+        for (var i = 0; i < this.allDot.Width; i++)
+        {
+            for (var j = 0; j < this.allDot.Height - 1; j++)
+            {
+                var isOriginDot = FindMatchedHeightOriginDot(i, j);
+                var isTargetDot = FindMatchedHeightTargetDot(i, j + 1);
+                if (isOriginDot || isTargetDot)
+                {
+                    var newMove = new MoveDot(i, j, i, j + 1);
+                    this.allMoves.Add(newMove);
+                }
+            }
+        }
+    }
+    #region Find All Matched Height
+    private bool FindMatchedHeightOriginDot(int i, int j)
+    {
+        var a = FindMatchedUpVertical(i, j);
+        var b = FindMatchedHorizontal(i, j, 1);
+        return IsMatched(a, b);
+    }
+    private bool FindMatchedHeightTargetDot(int i, int j)
+    {
+        var a = FindMatchedDownVertical(i, j);
+        var b = FindMatchedHorizontal(i, j, -1);
+        return IsMatched(a, b);
+    }
+
+    private bool FindMatchedDownVertical(int i, int j)
+    {
+        var count = 1;
+        var originDot = this.allTags[i, j];
+        var downDot = j - 2 > 0 ? this.allTags[i, j - 2] : string.Empty;
+        var downDot2 = j - 3 >= 0 ? this.allTags[i, j - 3] : string.Empty;
+
+        if (originDot == downDot)
+        {
+            count++;
+            if (originDot == downDot2)
+                count++;
+        }
+        return Find3Matched(count);
+    }
+
+    private bool FindMatchedUpVertical(int i, int j)
+    {
+        var count = 1;
+        var originDot = this.allTags[i, j];
+        var upDot = j + 2 < this.allDot.Height ? this.allTags[i, j + 2] : string.Empty;
+        var upDot2 = j + 3 < this.allDot.Height ? this.allTags[i, j + 3] : string.Empty;
+        if (originDot == upDot)
+        {
+            count++;
+            if (originDot == upDot2)
+                count++;
+        }
+        return Find3Matched(count);
+    }
+
+    private bool FindMatchedHorizontal(int i, int j, int k)
+    {
+        var count = 1;
+        var originDot = this.allTags[i, j];
+        var leftDot = i - 1 > 0 ? this.allTags[i - 1, j + k] : string.Empty;
+        var leftDot2 = i - 2 >= 0 ? this.allTags[i - 2, j + k] : string.Empty;
+
+        var rightDot = i + 1 < this.allDot.Width ? this.allTags[i + 1, j + k] : string.Empty;
+        var rightDot2 = i + 2 < this.allDot.Width ? this.allTags[i + 2, j] : string.Empty;
+
+        if (originDot == leftDot)
+        {
+            count++;
+            if (originDot == leftDot2)
+                count++;
+        }
+
+        if (originDot == rightDot)
+        {
+            count++;
+            if (originDot == rightDot2)
+                count++;
+        }
+
+        return Find3Matched(count);
+    }
+
     #endregion
 
     private bool Find3Matched(int count)
@@ -153,5 +245,10 @@ public class EnemyAI : MonoBehaviour
         if (a || b)
             return true;
         return false;
+    }
+
+    public void AutoTurn()
+    {
+        this.isTurnEnemy = true;
     }
 }

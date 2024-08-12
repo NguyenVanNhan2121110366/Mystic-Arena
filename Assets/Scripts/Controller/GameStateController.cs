@@ -35,6 +35,7 @@ public class GameStateController : MonoBehaviour
         {
             this.scoreController.ResetScore();
             currentGameState = GameState.Swipe;
+            StartCoroutine(TurnController.Instance.CheckTurnAnSwitch());
         }
     }
 }
