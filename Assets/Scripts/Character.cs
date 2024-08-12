@@ -66,7 +66,7 @@ public class Character : MonoBehaviour
 
     }
 
-    public virtual void UpdateScorePlayer()
+    public virtual void UpdateScore()
     {
 
     }

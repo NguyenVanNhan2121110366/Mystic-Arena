@@ -198,11 +198,14 @@ public class DotInteraction : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (TurnController.Instance.CurrentTurn != GameTurn.Player && GameStateController.Instance.CurrentGameState != GameState.Swipe)
+            return;
         mouseDown = GetInput();
-
     }
     private void OnMouseUp()
     {
+        if (TurnController.Instance.CurrentTurn != GameTurn.Player && GameStateController.Instance.CurrentGameState != GameState.Swipe)
+            return;
         mouseUp = GetInput();
         var inputDirection = CheckTouch();
         this.GetValueInput(inputDirection);

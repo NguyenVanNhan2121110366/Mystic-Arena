@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MoveDot : MonoBehaviour
+public class MoveDot
 {
     private int originDotCol, originDotRow, targetDotCol, targetDotRow;
     public int OriginDotCol { get => originDotCol; set => originDotCol = value; }
@@ -14,9 +14,9 @@ public class MoveDot : MonoBehaviour
 
     public MoveDot(int originDotCol, int originDotRow, int targetDotCol, int targetDotRow)
     {
-        this.originDotCol = originDotCol;
-        this.originDotRow = originDotRow;
-        this.targetDotCol = targetDotCol;
-        this.targetDotRow = targetDotRow;
+        this.OriginDotCol = originDotCol;
+        this.OriginDotRow = originDotRow;
+        this.TargetDotCol = targetDotCol;
+        this.TargetDotRow = targetDotRow;
     }
 }

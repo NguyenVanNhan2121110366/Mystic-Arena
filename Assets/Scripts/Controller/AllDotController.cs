@@ -223,7 +223,6 @@ public class AllDotController : MonoBehaviour
             if (GameStateController.Instance.CurrentGameState == GameState.FillingDot)
             {
                 this.scoreController.UpdateScore();
-                yield return new WaitForSeconds(0.2f);
                 if (GameStateController.Instance.CurrentGameState == GameState.FillingDot)
                 {
                     GameStateController.Instance.CurrentGameState = GameState.Finish;

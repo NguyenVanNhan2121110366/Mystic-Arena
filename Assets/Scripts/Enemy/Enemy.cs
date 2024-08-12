@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 public class Enemy : Character
 {
@@ -22,9 +23,11 @@ public class Enemy : Character
     [SerializeField] private GameObject attackRate;
     [SerializeField] private Quaternion rotationPlayer;
     [SerializeField] private Vector2 posPlayer;
+    private ScoreController scoreController;
     public bool IsMoving { get => isMoving; set => isMoving = value; }
     private void Awake()
     {
+        this.scoreController = FindFirstObjectByType<ScoreController>();
         this.shieldBar = GameObject.Find("ShieldBarEnemy").GetComponent<Image>();
         this.healBar = GameObject.Find("HealBarEnemy").GetComponent<Image>();
         this.manaBar = GameObject.Find("ManaBarEnemy").GetComponent<Image>();
@@ -48,6 +51,16 @@ public class Enemy : Character
     public override void Attacking()
     {
 
+    }
+
+    public override void UpdateScore()
+    {
+        base.UpdateScore();
+        ScoreHeal = this.scoreController.ScoreHeal;
+        ScoreMana = this.scoreController.ScoreMana;
+        ScoreAttack = this.scoreController.ScoreAttack;
+        ScoreGold = this.scoreController.ScoreGold;
+        ScoreShield = this.scoreController.ScoreShield;
     }
 
     private void OnTriggerEnter2D(Collider2D other)

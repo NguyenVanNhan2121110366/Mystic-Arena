@@ -13,10 +13,12 @@ public class EnemyAI : MonoBehaviour
     {
         this.allDot = FindFirstObjectByType<AllDotController>();
         this.allTags = new string[this.allDot.Width, this.allDot.Height];
+        this.allMoves = new List<MoveDot>();
     }
     private void Start()
     {
-        this.allMoves = new List<MoveDot>();
+        
+        this.isTurnEnemy = false;
 
     }
 
@@ -26,16 +28,16 @@ public class EnemyAI : MonoBehaviour
         {
             this.allMoves.Clear();
             this.GetAllTag();
-            StartCoroutine(this.RandomMoveDot());
             this.FindAllMatchedWidth();
-            this.FindAllMatchedHeight();
+            //this.FindAllMatchedHeight();
+            StartCoroutine(this.RandomMoveDot());
             this.isTurnEnemy = false;
         }
     }
 
     private IEnumerator RandomMoveDot()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.5f);
         var randomIndex = Random.Range(0, this.allMoves.Count);
         var moveDot = this.allMoves[randomIndex];
         var originDot = this.allDot.AllDots[moveDot.OriginDotCol, moveDot.OriginDotRow];
@@ -90,7 +92,7 @@ public class EnemyAI : MonoBehaviour
 
     private bool FindMatchedLeftHorizontal(int i, int j)
     {
-        var count = 0;
+        var count = 1;
         var dot = this.allTags[i, j];
         var leftDot = i - 2 > 0 ? this.allTags[i - 2, j] : string.Empty;
         var leftDot2 = i - 3 >= 0 ? this.allTags[i - 3, j] : string.Empty;
@@ -235,7 +237,7 @@ public class EnemyAI : MonoBehaviour
 
     private bool Find3Matched(int count)
     {
-        if (count == 3)
+        if (count >= 3)
             return true;
         return false;
     }
@@ -244,7 +246,8 @@ public class EnemyAI : MonoBehaviour
     {
         if (a || b)
             return true;
-        return false;
+        else
+            return false;
     }
 
     public void AutoTurn()

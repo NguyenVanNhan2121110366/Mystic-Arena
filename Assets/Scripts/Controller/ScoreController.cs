@@ -26,13 +26,22 @@ public class ScoreController : MonoBehaviour
     }
     public void UpdateScore()
     {
-        Player.Instance.UpdateScorePlayer();
-        Player.Instance.UpdateScoreBar();
-        if (Player.Instance.ScoreAttack > 0)
+        if (TurnController.Instance.CurrentTurn == GameTurn.Player)
         {
-            GameStateController.Instance.CurrentGameState = GameState.Attacking;
-            Player.Instance.IsMoving = true;
+            Player.Instance.UpdateScore();
+            Player.Instance.UpdateScoreBar();
+            if (Player.Instance.ScoreAttack > 0)
+            {
+                GameStateController.Instance.CurrentGameState = GameState.Attacking;
+                Player.Instance.IsMoving = true;
+            }
         }
+        if (TurnController.Instance.CurrentTurn == GameTurn.Enemy)
+        {
+            Enemy.Instance.UpdateScore();
+            Enemy.Instance.UpdateScoreBar();
+        }
+
     }
     public void ResetScore()
     {

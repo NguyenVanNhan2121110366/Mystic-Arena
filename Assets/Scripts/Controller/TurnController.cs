@@ -35,15 +35,16 @@ public class TurnController : MonoBehaviour
 
     }
 
-    public IEnumerator CheckTurnAnSwitch()
+    public IEnumerator CheckTurnAndSwitch()
     {
         this.turn--;
+        yield return null;
         if (this.turn <= 0)
         {
             this.SwitchTurn();
             yield return null;
-            this.SetNewTurn();
             this.turn = 1;
+            this.SetNewTurn();
         }
         else
         {
@@ -53,7 +54,8 @@ public class TurnController : MonoBehaviour
     }
     private void SetNewTurn()
     {
-        this.enemyAI.AutoTurn();
+        //this.enemyAI.AutoTurn();
+        FindFirstObjectByType<EnemyAI>().AutoTurn();
     }
     private void SwitchTurn()
     {

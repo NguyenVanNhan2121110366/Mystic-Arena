@@ -50,9 +50,9 @@ public class Player : Character
         this.Attacking();
     }
 
-    public override void UpdateScorePlayer()
+    public override void UpdateScore()
     {
-        base.UpdateScorePlayer();
+        base.UpdateScore();
         ScoreHeal = this.scoreController.ScoreHeal;
         ScoreMana = this.scoreController.ScoreMana;
         ScoreAttack = this.scoreController.ScoreAttack;
@@ -90,7 +90,7 @@ public class Player : Character
                     isBackToBase = false;
 
                     transform.rotation = rotationPlayer;
-                    GameStateController.Instance.CurrentGameState = GameState.FillingDot;
+                    GameStateController.Instance.CurrentGameState = GameState.Finish;
                 }
             }
         }
