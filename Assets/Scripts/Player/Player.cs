@@ -32,6 +32,7 @@ public class Player : Character
         this.shieldBar = GameObject.Find("ShieldBarPlayer").GetComponent<Image>();
         this.healBar = GameObject.Find("HealBarPlayer").GetComponent<Image>();
         this.manaBar = GameObject.Find("ManaBarPlayer").GetComponent<Image>();
+        
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -41,6 +42,7 @@ public class Player : Character
         CurrentScoreShield = 0f;
         this.rotationPlayer = transform.rotation;
         this.posPlayer = transform.position;
+        this.CurrentGold = 0;
     }
 
     // Update is called once per frame
@@ -115,5 +117,26 @@ public class Player : Character
         this.isIdle = true;
         this.isBackToBase = true;
         this.attackRate.SetActive(false);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("AttackPlayer"))
+        {
+            this.animator.SetTrigger("Hit");
+            if (CurrentScoreHeal > 0)
+            {
+                Debug.Log("Test AttackPlayer");
+                if (CurrentScoreShield > 0)
+                {
+                    this.CurrentScoreShield -= Enemy.Instance.ScoreAttack;
+
+                }
+                if (CurrentScoreShield <= 0)
+                {
+                    this.CurrentScoreHeal -= Enemy.Instance.ScoreAttack;
+                }
+            }
+        }
     }
 }

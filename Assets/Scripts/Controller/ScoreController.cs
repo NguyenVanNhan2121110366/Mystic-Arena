@@ -1,5 +1,4 @@
 using UnityEngine;
-
 public class ScoreController : MonoBehaviour
 {
     [SerializeField] private float scoreHeal;
@@ -36,13 +35,19 @@ public class ScoreController : MonoBehaviour
                 Player.Instance.IsMoving = true;
             }
         }
-        if (TurnController.Instance.CurrentTurn == GameTurn.Enemy)
+        else if (TurnController.Instance.CurrentTurn == GameTurn.Enemy)
         {
             Enemy.Instance.UpdateScore();
             Enemy.Instance.UpdateScoreBar();
+            if (Enemy.Instance.ScoreAttack > 0)
+            {
+                GameStateController.Instance.CurrentGameState = GameState.Attacking;
+                Enemy.Instance.IsMoving = true;
+            }
         }
 
     }
+
     public void ResetScore()
     {
         scoreHeal = 0;

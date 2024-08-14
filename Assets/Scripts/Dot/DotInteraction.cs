@@ -119,6 +119,7 @@ public class DotInteraction : MonoBehaviour
                 targetDot.GetComponent<DotInteraction>().row = row;
                 row = preRow;
                 column = preColumn;
+                GameStateController.Instance.CurrentGameState = GameState.Swipe;
             }
             else
             {
@@ -198,13 +199,13 @@ public class DotInteraction : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (TurnController.Instance.CurrentTurn != GameTurn.Player && GameStateController.Instance.CurrentGameState != GameState.Swipe)
+        if (TurnController.Instance.CurrentTurn != GameTurn.Player || GameStateController.Instance.CurrentGameState != GameState.Swipe)
             return;
         mouseDown = GetInput();
     }
     private void OnMouseUp()
     {
-        if (TurnController.Instance.CurrentTurn != GameTurn.Player && GameStateController.Instance.CurrentGameState != GameState.Swipe)
+        if (TurnController.Instance.CurrentTurn != GameTurn.Player || GameStateController.Instance.CurrentGameState != GameState.Swipe)
             return;
         mouseUp = GetInput();
         var inputDirection = CheckTouch();

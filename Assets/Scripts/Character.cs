@@ -18,6 +18,8 @@ public class Character : MonoBehaviour
     [SerializeField] private float maxScoreAttack;
     [SerializeField] private float maxScoreGold;
     [SerializeField] private float maxScoreShield;
+    [SerializeField] private int currentGold;
+    public Dot dot;
     public Image healBar;
     public Image manaBar;
     public Image shieldBar;
@@ -41,8 +43,8 @@ public class Character : MonoBehaviour
     public float MaxScoreAttack { get => maxScoreAttack; set => maxScoreAttack = value; }
     public float MaxScoreGold { get => maxScoreGold; set => maxScoreGold = value; }
     public float MaxScoreShield { get => maxScoreShield; set => maxScoreShield = value; }
+    public int CurrentGold { get => currentGold; set => currentGold = value; }
     #endregion
-
     protected void UpdateBar()
     {
         healBar.fillAmount = Mathf.Lerp(healBar.fillAmount, currentScoreHeal / maxScoreHeal, 9 * Time.deltaTime);
@@ -74,6 +76,14 @@ public class Character : MonoBehaviour
     public virtual void Attacking()
     {
 
+    }
+
+    public virtual int CheckScoreGold()
+    {
+        this.dot = FindFirstObjectByType<Dot>();
+        this.currentGold += dot.scoreGold;
+        return currentGold;
+        //return scoreGold;
     }
 
 

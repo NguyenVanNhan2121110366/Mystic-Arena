@@ -8,6 +8,7 @@ public class AllDotController : MonoBehaviour
     [SerializeField] private GameObject[] dots = new GameObject[9];
     [SerializeField] private Transform parentObj;
     [SerializeField] private GameObject girdPrefab;
+    [SerializeField] private GameObject[] allEffects;
     private GameObject[,] allGrids;
     private GameObject[,] allDots;
     private ScoreController scoreController;
@@ -120,13 +121,52 @@ public class AllDotController : MonoBehaviour
             numberIndex = 8;
         return numberIndex;
     }
+
+    #region Spawn Effects
+
+    private void SpawnEffects(Dot dot)
+    {
+        //dot = GetComponent<DotInteraction>();
+
+    }
+    private int GetEffects(GameObject dot)
+    {
+        var index = 0;
+        switch (dot.tag)
+        {
+            case "Blood":
+                index = 0;
+                break;
+            case "Gold":
+                index = 1;
+                break;
+            case "Mana":
+                index = 2;
+                break;
+            case "Shield":
+                index = 3;
+                break;
+            case "Sword":
+                index = 4;
+                break;
+            default:
+                break;
+        }
+        return index;
+    }
+    #endregion
     #region Destroy Matched
     private void DestroyMatchedAt(int column, int row)
     {
+        var dot = this.allDots[column, row];
         if (this.allDots[column, row].GetComponent<DotInteraction>().IsMatched)
         {
-            Destroy(this.allDots[column, row]);
+            var effectDot = this.GetEffects(dot);
+            var position = dot.transform.position;
+            Destroy(dot);
             this.allDots[column, row] = null;
+            var objEffect = Instantiate(allEffects[effectDot], position, Quaternion.identity);
+            Destroy(objEffect, 1f);
         }
     }
 
@@ -139,7 +179,9 @@ public class AllDotController : MonoBehaviour
             {
                 if (this.allDots[i, j] != null)
                 {
+                    this.SpawnEffects(this.allGrids[i, j].GetComponent<Dot>());
                     this.DestroyMatchedAt(i, j);
+
                 }
             }
         }
@@ -223,6 +265,7 @@ public class AllDotController : MonoBehaviour
             if (GameStateController.Instance.CurrentGameState == GameState.FillingDot)
             {
                 this.scoreController.UpdateScore();
+                yield return new WaitForSeconds(0.5f);
                 if (GameStateController.Instance.CurrentGameState == GameState.FillingDot)
                 {
                     GameStateController.Instance.CurrentGameState = GameState.Finish;

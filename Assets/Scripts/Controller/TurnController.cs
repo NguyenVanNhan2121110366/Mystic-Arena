@@ -42,7 +42,6 @@ public class TurnController : MonoBehaviour
         if (this.turn <= 0)
         {
             this.SwitchTurn();
-            yield return null;
             this.turn = 1;
             this.SetNewTurn();
         }

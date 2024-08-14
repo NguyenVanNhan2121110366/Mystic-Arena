@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using TMPro;
 public class Dot : MonoBehaviour
 {
     private AllDotController alldots;
@@ -7,15 +7,20 @@ public class Dot : MonoBehaviour
     [SerializeField] private string dotName;
     [SerializeField] private string dotTag;
     [SerializeField] private int score;
+    public int scoreGold;
+    public int checkScoreGold;
+    [SerializeField] private TextMeshProUGUI txtScoreGold;
     private void Awake()
     {
         this.alldots = FindFirstObjectByType<AllDotController>();
         this.scoreController = FindFirstObjectByType<ScoreController>();
+        this.txtScoreGold = GameObject.Find("ScoreGold").GetComponent<TextMeshProUGUI>();
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         this.dotTag = gameObject.tag;
+        this.checkScoreGold = 0;
     }
     private void OnDestroy()
     {
@@ -35,7 +40,10 @@ public class Dot : MonoBehaviour
         }
         if (dotTag == "Gold")
         {
+            
+            this.checkScoreGold += Player.Instance.CheckScoreGold();
             this.scoreController.ScoreGold += this.score;
+            this.txtScoreGold.text = " X " + checkScoreGold;
         }
         if (dotTag == "Mana")
         {
