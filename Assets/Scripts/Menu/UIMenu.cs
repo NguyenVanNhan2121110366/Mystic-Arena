@@ -8,6 +8,7 @@ public class UIMenu : MonoBehaviour
     [SerializeField] private GameObject chooseShop;
     [SerializeField] private Button bntShopItem;
     [SerializeField] private Button bntShopSkill;
+    [SerializeField] private Button BntClickExit;
     private SaveAllData saveAllData;
 
     private bool checkChooseShop;
@@ -57,5 +58,9 @@ public class UIMenu : MonoBehaviour
     private void ClickShopSkill()
     {
 
+    }
+    private void ClickExit()
+    {
+        
     }
 }

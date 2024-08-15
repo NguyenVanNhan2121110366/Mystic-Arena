@@ -2,16 +2,11 @@ using UnityEngine;
 
 public class SaveAllData : MonoBehaviour
 {
-    private ShopItem shopItem;
-    private void Awake()
-    {
-        this.shopItem = FindFirstObjectByType<ShopItem>();
-    }
+
     public void SaveDataGoldPlayer()
     {
         SaveGame.Instance.saveData.goldPlayer[0] = Player.Instance.CurrentGold;
         SaveGame.Instance.saveData.goldPlayer[1] = SaveGame.Instance.saveData.goldPlayer[0] + SaveGame.Instance.saveData.goldPlayer[1];
-
         SaveGame.Instance.Save();
         Debug.Log("Save data");
     }
@@ -20,5 +15,31 @@ public class SaveAllData : MonoBehaviour
     {
         SaveGame.Instance.saveData.goldPlayer[0] = 0;
         SaveGame.Instance.saveData.goldPlayer[1] = 0;
+        SaveGame.Instance.Save();
+    }
+    public void SaveAllDataGame()
+    {
+        //Player
+        SaveGame.Instance.saveData.scoreBlood[0] = Player.Instance.CurrentScoreHeal;
+        SaveGame.Instance.saveData.scoreMana[0] = Player.Instance.CurrentScoreMana;
+        SaveGame.Instance.saveData.scoreShield[0] = Player.Instance.CurrentScoreShield;
+
+        //Enemy
+        SaveGame.Instance.saveData.scoreBlood[1] = Enemy.Instance.CurrentScoreHeal;
+        SaveGame.Instance.saveData.scoreMana[1] = Enemy.Instance.CurrentScoreMana;
+        SaveGame.Instance.saveData.scoreShield[1] = Enemy.Instance.CurrentScoreShield;
+        SaveGame.Instance.Save();
+    }
+
+    public void LoadAllDataGame()
+    {
+        SaveGame.Instance.Load();
+        Player.Instance.CurrentScoreHeal = SaveGame.Instance.saveData.scoreBlood[0];
+        Player.Instance.CurrentScoreMana = SaveGame.Instance.saveData.scoreMana[0];
+        Player.Instance.CurrentScoreShield = SaveGame.Instance.saveData.scoreShield[0];
+
+        Enemy.Instance.CurrentScoreHeal = SaveGame.Instance.saveData.scoreBlood[1];
+        Enemy.Instance.CurrentScoreMana = SaveGame.Instance.saveData.scoreMana[1];
+        Enemy.Instance.CurrentScoreShield = SaveGame.Instance.saveData.scoreShield[1];
     }
 }

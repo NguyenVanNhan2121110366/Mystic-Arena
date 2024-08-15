@@ -8,6 +8,9 @@ using UnityEngine;
 public class SaveData
 {
     public int[] goldPlayer = new int[5];
+    public float[] scoreBlood = new float[5];
+    public float[] scoreShield = new float[5];
+    public float[] scoreMana = new float[5];
 }
 
 public class SaveGame : MonoBehaviour

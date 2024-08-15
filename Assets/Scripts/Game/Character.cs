@@ -55,10 +55,15 @@ public class Character : MonoBehaviour
     public void UpdateScoreBar()
     {
         currentScoreHeal += scoreHeal;
+
         currentScoreAttack += scoreAttack;
+
         currentScoreMana += scoreMana;
+
         currentScoreGold += scoreGold;
+
         currentScoreShield += scoreShield;
+        
         currentScoreHeal = currentScoreHeal > maxScoreHeal ? maxScoreHeal : currentScoreHeal;
         currentScoreMana = currentScoreMana > maxScoreMana ? maxScoreMana : currentScoreMana;
         currentScoreShield = currentScoreShield > maxScoreShield ? maxScoreShield : currentScoreShield;

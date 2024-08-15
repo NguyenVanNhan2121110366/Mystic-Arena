@@ -265,7 +265,7 @@ public class AllDotController : MonoBehaviour
             }
             if (GameStateController.Instance.CurrentGameState == GameState.FillingDot)
             {
-                // this.scoreController.UpdateScore();
+                this.scoreController.UpdateScore();
                 // Player.Instance.PlusScoreGold();
                 yield return new WaitForSeconds(0.5f);
                 if (GameStateController.Instance.CurrentGameState == GameState.FillingDot)
