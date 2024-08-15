@@ -10,21 +10,15 @@ public class SaveAllData : MonoBehaviour
     public void SaveDataGoldPlayer()
     {
         SaveGame.Instance.saveData.goldPlayer[0] = Player.Instance.CurrentGold;
+        SaveGame.Instance.saveData.goldPlayer[1] = SaveGame.Instance.saveData.goldPlayer[0] + SaveGame.Instance.saveData.goldPlayer[1];
+
         SaveGame.Instance.Save();
         Debug.Log("Save data");
     }
 
-    public void LoadDataGoldPlayer()
+    public void ResetData()
     {
-        SaveGame.Instance.Load();
-        this.shopItem.GoldPlayer = SaveGame.Instance.saveData.goldPlayer[0];
-        Debug.Log("Load data");
-    }
-
-    public void LoadDataGoldGame()
-    {
-        SaveGame.Instance.Load();
-        Player.Instance.CurrentGold = SaveGame.Instance.saveData.goldPlayer[0];
-
+        SaveGame.Instance.saveData.goldPlayer[0] = 0;
+        SaveGame.Instance.saveData.goldPlayer[1] = 0;
     }
 }

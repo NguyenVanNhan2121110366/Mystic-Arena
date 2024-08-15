@@ -8,11 +8,13 @@ public class UIMenu : MonoBehaviour
     [SerializeField] private GameObject chooseShop;
     [SerializeField] private Button bntShopItem;
     [SerializeField] private Button bntShopSkill;
-   
+    private SaveAllData saveAllData;
+
     private bool checkChooseShop;
 
     private void Awake()
     {
+        this.saveAllData = FindFirstObjectByType<SaveAllData>();
         this.chooseShop = GameObject.Find("ChooseShop");
         this.bntShop = GameObject.Find("Shop").GetComponent<Button>();
         this.bntShopItem = GameObject.Find("ShopItem").GetComponent<Button>();
@@ -29,6 +31,7 @@ public class UIMenu : MonoBehaviour
     private void ClickStart()
     {
         SceneManager.LoadScene("Game");
+        this.saveAllData.ResetData();
     }
 
     private void ClickShop()

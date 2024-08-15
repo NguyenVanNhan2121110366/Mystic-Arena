@@ -54,6 +54,11 @@ public class SaveGame : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        Load();
+    }
+
 
 
 

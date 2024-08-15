@@ -20,28 +20,17 @@ public class ShopItem : MonoBehaviour
         if (bntTest != null)
             this.bntTest.onClick.AddListener(this.CheckClick);
         SaveGame.Instance.Load();
-        if (SaveGame.Instance.saveData.goldPlayer[1] == 0)
-        {
-            goldPlayer = SaveGame.Instance.saveData.goldPlayer[0];
-        }
-        if (SaveGame.Instance.saveData.goldPlayer[1] > 0)
-        {
-            goldPlayer = SaveGame.Instance.saveData.goldPlayer[1];
-            goldPlayer += SaveGame.Instance.saveData.goldPlayer[0];
-        }
-
-        //goldPlayer += SaveGame.Instance.saveData.goldPlayer[1];
+        this.goldPlayer = SaveGame.Instance.saveData.goldPlayer[1];
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
         this.LoadGold();
+        Debug.Log(goldPlayer);
     }
     private void Update()
     {
-        SaveGame.Instance.saveData.goldPlayer[1] = this.goldPlayer;
-        SaveGame.Instance.Save();
+        Debug.Log(goldPlayer);
     }
 
 
@@ -53,8 +42,6 @@ public class ShopItem : MonoBehaviour
 
     private void CheckClick()
     {
-
         SceneManager.LoadScene("Game");
-
     }
 }
