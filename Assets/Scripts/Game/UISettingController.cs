@@ -4,7 +4,14 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class UISettingController : MonoBehaviour
 {
+    private SaveAllData save;
+
     [SerializeField] private Button reset;
+
+    private void Awake()
+    {
+        this.save = FindFirstObjectByType<SaveAllData>();
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -20,5 +27,6 @@ public class UISettingController : MonoBehaviour
     private void ClickReset()
     {
         SceneManager.LoadScene("Menu");
+        this.save.SaveDataGoldPlayer();
     }
 }

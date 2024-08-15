@@ -8,6 +8,7 @@ public class UIMenu : MonoBehaviour
     [SerializeField] private GameObject chooseShop;
     [SerializeField] private Button bntShopItem;
     [SerializeField] private Button bntShopSkill;
+   
     private bool checkChooseShop;
 
     private void Awake()

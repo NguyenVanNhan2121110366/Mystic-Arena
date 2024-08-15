@@ -32,6 +32,7 @@ public class AllDotController : MonoBehaviour
         this.allGrids = new GameObject[this.width, this.height];
         this.GetAllDotToArray();
         StartCoroutine(this.CreateDotAndGrid());
+
     }
 
     private void GetAllDotToArray()
@@ -264,7 +265,8 @@ public class AllDotController : MonoBehaviour
             }
             if (GameStateController.Instance.CurrentGameState == GameState.FillingDot)
             {
-                this.scoreController.UpdateScore();
+                // this.scoreController.UpdateScore();
+                // Player.Instance.PlusScoreGold();
                 yield return new WaitForSeconds(0.5f);
                 if (GameStateController.Instance.CurrentGameState == GameState.FillingDot)
                 {

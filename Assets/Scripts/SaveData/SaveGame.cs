@@ -1,16 +1,19 @@
+using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using UnityEditor.Overlays;
 using UnityEngine;
 
-
+[Serializable]
 public class SaveData
 {
-    public int[] gold = new int[5];
+    public int[] goldPlayer = new int[5];
 }
+
 public class SaveGame : MonoBehaviour
 {
-    private SaveGame instance;
-    public SaveGame Instance
+    private static SaveGame instance;
+    public static SaveGame Instance
     {
         get
         {
@@ -21,29 +24,37 @@ public class SaveGame : MonoBehaviour
             return instance;
         }
     }
+
     public SaveData saveData;
 
     public void Save()
     {
-        // 
-        var binaryFormatter = new BinaryFormatter();
-        FileStream file = File.Open(Application.persistentDataPath + "/Game.data", FileMode.OpenOrCreate);
+        var dataPath = Application.persistentDataPath + "/saveGame.data";
+        var binary = new BinaryFormatter();
+        var fileStream = File.Open(dataPath, FileMode.OpenOrCreate);
         var saveDataGame = new SaveData();
         saveDataGame = saveData;
-        binaryFormatter.Serialize(file, saveDataGame);
-        file.Close();
+        binary.Serialize(fileStream, saveDataGame);
+        fileStream.Close();
     }
-
 
     public void Load()
     {
-        var filePath = Application.persistentDataPath + "/Game.data";
-        if (File.Exists(filePath))
+        var dataPath = Application.persistentDataPath + "/saveGame.data";
+        if (File.Exists(dataPath))
         {
             var binary = new BinaryFormatter();
-            var file = File.Open(filePath, FileMode.Open);
-            saveData = (SaveData)binary.Deserialize(file);
-            file.Close();
+            var fileStream = File.Open(dataPath, FileMode.Open);
+            saveData = (SaveData)binary.Deserialize(fileStream);
+            fileStream.Close();
+        }
+        else
+        {
+            Debug.Log("None");
         }
     }
+
+
+
+
 }

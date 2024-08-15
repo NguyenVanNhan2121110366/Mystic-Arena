@@ -83,8 +83,6 @@ public class Character : MonoBehaviour
         this.dot = FindFirstObjectByType<Dot>();
         if (dot != null)
             this.currentGold += dot.scoreGold;
-           
-
         return currentGold;
         //return scoreGold;
     }

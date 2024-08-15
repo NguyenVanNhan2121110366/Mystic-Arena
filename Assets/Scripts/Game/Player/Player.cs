@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 public class Player : Character
 {
     private static Player instance;
@@ -24,15 +25,19 @@ public class Player : Character
     [SerializeField] private GameObject attackRate;
     [SerializeField] private Quaternion rotationPlayer;
     [SerializeField] private Vector2 posPlayer;
+    [SerializeField] private TextMeshProUGUI txtScoreGold;
+
+    private SaveAllData saveAllData;
     public bool IsMoving { get => isMoving; set => isMoving = value; }
     private void Awake()
     {
+        this.txtScoreGold = GameObject.Find("ScoreGold").GetComponent<TextMeshProUGUI>();
         this.scoreController = FindFirstObjectByType<ScoreController>();
         this.animator = GetComponent<Animator>();
         this.shieldBar = GameObject.Find("ShieldBarPlayer").GetComponent<Image>();
         this.healBar = GameObject.Find("HealBarPlayer").GetComponent<Image>();
         this.manaBar = GameObject.Find("ManaBarPlayer").GetComponent<Image>();
-        
+
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -139,4 +144,10 @@ public class Player : Character
             }
         }
     }
+
+
+    // public void PlusScoreGold()
+    // {
+    //     this.txtScoreGold.text = " X " + CheckScoreGold();
+    // }
 }
