@@ -12,12 +12,18 @@ public class UIMenu : MonoBehaviour
 
     private void Awake()
     {
+        this.chooseShop = GameObject.Find("ChooseShop");
+        this.bntShop = GameObject.Find("Shop").GetComponent<Button>();
+        this.bntShopItem = GameObject.Find("ShopItem").GetComponent<Button>();
+        this.bntShopSkill = GameObject.Find("ShopSkill").GetComponent<Button>();
         this.bntStart.onClick.AddListener(ClickStart);
         this.bntShop.onClick.AddListener(ClickShop);
+        this.bntShopItem.onClick.AddListener(ClickShopItem);
     }
     private void Start()
     {
         this.checkChooseShop = false;
+        this.chooseShop.SetActive(false);
     }
     private void ClickStart()
     {
@@ -27,13 +33,21 @@ public class UIMenu : MonoBehaviour
     private void ClickShop()
     {
         if (checkChooseShop)
-            this.chooseShop.SetActive(true);
+        {
+            this.chooseShop.SetActive(false);
+            this.checkChooseShop = false;
+
+        }
         else
+        {
             this.chooseShop.SetActive(true);
+            this.checkChooseShop = true;
+        }
+
     }
     private void ClickShopItem()
     {
-
+        SceneManager.LoadScene("ShopItem");
     }
 
     private void ClickShopSkill()

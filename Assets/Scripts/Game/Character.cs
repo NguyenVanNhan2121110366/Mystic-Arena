@@ -81,7 +81,10 @@ public class Character : MonoBehaviour
     public virtual int CheckScoreGold()
     {
         this.dot = FindFirstObjectByType<Dot>();
-        this.currentGold += dot.scoreGold;
+        if (dot != null)
+            this.currentGold += dot.scoreGold;
+           
+
         return currentGold;
         //return scoreGold;
     }
