@@ -71,6 +71,7 @@ public class UISettingController : MonoBehaviour
     private void ClickSave()
     {
         this.save.SaveAllDataGame();
+        this.save.SaveDataGoldPlayer();
     }
     private void ClickLoad()
     {

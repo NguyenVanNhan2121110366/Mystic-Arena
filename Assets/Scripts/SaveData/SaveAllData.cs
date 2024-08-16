@@ -5,8 +5,10 @@ public class SaveAllData : MonoBehaviour
 
     public void SaveDataGoldPlayer()
     {
-        SaveGame.Instance.saveData.goldPlayer[0] = Player.Instance.CurrentGold;
+        if (Player.Instance != null)
+            SaveGame.Instance.saveData.goldPlayer[0] = Player.Instance.CurrentGold;
         SaveGame.Instance.saveData.goldPlayer[1] = SaveGame.Instance.saveData.goldPlayer[0] + SaveGame.Instance.saveData.goldPlayer[1];
+        SaveGame.Instance.saveData.goldPlayer[0] = 0;
         SaveGame.Instance.Save();
         Debug.Log("Save data");
     }
