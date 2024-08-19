@@ -208,7 +208,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a1abfd387650cc4fb93c816d8539d14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 10
+  price: 1
+  txtPrice: {fileID: 1655611616}
 --- !u!1 &49918748
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,7 +434,7 @@ GameObject:
   - component: {fileID: 201744406}
   - component: {fileID: 201744405}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: txtPrice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -782,7 +783,7 @@ GameObject:
   - component: {fileID: 343255549}
   - component: {fileID: 343255551}
   m_Layer: 5
-  m_Name: Item1 (1)
+  m_Name: ItemMana
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -829,7 +830,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 4902729985760503732, guid: 145563a6a1f4a0e448b9eae69fcb854d, type: 3}
+  m_Sprite: {fileID: -1965184042450674564, guid: 145563a6a1f4a0e448b9eae69fcb854d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -859,7 +860,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a1abfd387650cc4fb93c816d8539d14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 0
+  price: 1
+  txtPrice: {fileID: 786352834}
 --- !u!1 &441337836
 GameObject:
   m_ObjectHideFlags: 0
@@ -1150,9 +1152,9 @@ MonoBehaviour:
   bntTest: {fileID: 471686593}
   currentGold: 0
   bntBuyBlood: {fileID: 0}
+  countItemsBlood: 0
   bntBuyMana: {fileID: 0}
   bntBuyShield: {fileID: 0}
-  price: 0
 --- !u!4 &527235074
 Transform:
   m_ObjectHideFlags: 0
@@ -1322,7 +1324,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &555432730
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1395,6 +1397,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   price: 0
+  txtPrice: {fileID: 0}
 --- !u!1 &568056609
 GameObject:
   m_ObjectHideFlags: 0
@@ -1489,7 +1492,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &713135800
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1562,6 +1565,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   price: 0
+  txtPrice: {fileID: 0}
 --- !u!1 &786352832
 GameObject:
   m_ObjectHideFlags: 0
@@ -1574,7 +1578,7 @@ GameObject:
   - component: {fileID: 786352835}
   - component: {fileID: 786352834}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: txtPrice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2180,7 +2184,7 @@ GameObject:
   - component: {fileID: 1116611505}
   - component: {fileID: 1116611504}
   m_Layer: 5
-  m_Name: Button
+  m_Name: ButtonShield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2573,7 +2577,7 @@ GameObject:
   - component: {fileID: 1150386228}
   - component: {fileID: 1150386227}
   m_Layer: 5
-  m_Name: Button
+  m_Name: ButtonBlood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3027,7 +3031,7 @@ GameObject:
   - component: {fileID: 1285939816}
   - component: {fileID: 1285939815}
   m_Layer: 5
-  m_Name: Button
+  m_Name: ButtonMana
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3259,7 +3263,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1399764359
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3332,6 +3336,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   price: 0
+  txtPrice: {fileID: 0}
 --- !u!1 &1402603689
 GameObject:
   m_ObjectHideFlags: 0
@@ -3829,7 +3834,7 @@ GameObject:
   - component: {fileID: 1655611617}
   - component: {fileID: 1655611616}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: txtPrice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4436,7 +4441,7 @@ GameObject:
   - component: {fileID: 2100806934}
   - component: {fileID: 2100806936}
   m_Layer: 5
-  m_Name: Item1 (2)
+  m_Name: ItemShield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4483,7 +4488,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 4902729985760503732, guid: 145563a6a1f4a0e448b9eae69fcb854d, type: 3}
+  m_Sprite: {fileID: 4836490520773336786, guid: 145563a6a1f4a0e448b9eae69fcb854d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4513,7 +4518,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a1abfd387650cc4fb93c816d8539d14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 0
+  price: 1
+  txtPrice: {fileID: 201744405}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

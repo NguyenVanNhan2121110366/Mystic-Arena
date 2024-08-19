@@ -17,6 +17,7 @@ public class SaveAllData : MonoBehaviour
     {
         SaveGame.Instance.saveData.goldPlayer[0] = 0;
         SaveGame.Instance.saveData.goldPlayer[1] = 0;
+        SaveGame.Instance.saveData.bloodItem[0, 0] = 0;
         SaveGame.Instance.Save();
     }
     public void SaveAllDataGame()

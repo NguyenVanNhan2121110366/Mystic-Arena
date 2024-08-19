@@ -7,10 +7,14 @@ using UnityEngine;
 [Serializable]
 public class SaveData
 {
+
     public int[] goldPlayer = new int[5];
     public float[] scoreBlood = new float[5];
     public float[] scoreShield = new float[5];
     public float[] scoreMana = new float[5];
+    public int[,] bloodItem = new int[5, 5];
+
+
 }
 
 public class SaveGame : MonoBehaviour
@@ -32,18 +36,16 @@ public class SaveGame : MonoBehaviour
 
     public void Save()
     {
-        var dataPath = Application.persistentDataPath + "/saveGame.data";
+        var dataPath = Application.persistentDataPath + "/saves.data";
         var binary = new BinaryFormatter();
         var fileStream = File.Open(dataPath, FileMode.OpenOrCreate);
-        var saveDataGame = new SaveData();
-        saveDataGame = saveData;
-        binary.Serialize(fileStream, saveDataGame);
+        binary.Serialize(fileStream, saveData);
         fileStream.Close();
     }
 
     public void Load()
     {
-        var dataPath = Application.persistentDataPath + "/saveGame.data";
+        var dataPath = Application.persistentDataPath + "/saves.data";
         if (File.Exists(dataPath))
         {
             var binary = new BinaryFormatter();
