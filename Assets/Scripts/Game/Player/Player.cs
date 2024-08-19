@@ -31,6 +31,7 @@ public class Player : Character
     public bool IsMoving { get => isMoving; set => isMoving = value; }
     private void Awake()
     {
+        this.saveAllData = FindFirstObjectByType<SaveAllData>();
         this.txtScoreGold = GameObject.Find("ScoreGold").GetComponent<TextMeshProUGUI>();
         this.scoreController = FindFirstObjectByType<ScoreController>();
         this.animator = GetComponent<Animator>();
@@ -48,6 +49,17 @@ public class Player : Character
         this.rotationPlayer = transform.rotation;
         this.posPlayer = transform.position;
         this.CurrentGold = 0;
+        if (SaveGame.Instance.saveData.isCheck[0])
+        {
+            SaveGame.Instance.saveData.isCheck[0] = false;
+            SaveGame.Instance.Save();
+        }
+        if (SaveGame.Instance.saveData.isCheck[1])
+        {
+            this.saveAllData.LoadAllDataGame();
+            SaveGame.Instance.saveData.isCheck[1] = false;
+            SaveGame.Instance.Save();
+        }
     }
 
     // Update is called once per frame

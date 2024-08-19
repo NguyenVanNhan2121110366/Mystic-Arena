@@ -69,12 +69,12 @@ public class InGameItem : MonoBehaviour
 
     private void ClickMana()
     {
-        UseItem(0, quantityMana, txtQuantityMana, healMana, (healMana) => this.player.CurrentScoreMana += healMana);
+        UseItem(1, quantityMana, txtQuantityMana, healMana, (healMana) => this.player.CurrentScoreMana += healMana);
     }
 
     private void ClickShield()
     {
-        UseItem(0, quantityShield, txtQuantityShield, healShield, (healShield) => this.player.CurrentScoreShield += healShield);
+        UseItem(2, quantityShield, txtQuantityShield, healShield, (healShield) => this.player.CurrentScoreShield += healShield);
     }
 
     private void UpdateQuantityItem()

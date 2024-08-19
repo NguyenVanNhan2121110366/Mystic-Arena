@@ -1,8 +1,15 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SaveAllData : MonoBehaviour
 {
+    [SerializeField] private Button bntContinue;
+   
 
+    private void Start()
+    {
+
+    }
     public void SaveDataGoldPlayer()
     {
         if (Player.Instance != null)
@@ -18,6 +25,8 @@ public class SaveAllData : MonoBehaviour
         SaveGame.Instance.saveData.goldPlayer[0] = 0;
         SaveGame.Instance.saveData.goldPlayer[1] = 0;
         SaveGame.Instance.saveData.bloodItem[0, 0] = 0;
+        SaveGame.Instance.saveData.bloodItem[0, 1] = 0;
+        SaveGame.Instance.saveData.bloodItem[0, 2] = 0;
         SaveGame.Instance.Save();
     }
     public void SaveAllDataGame()

@@ -54,7 +54,7 @@ public class ShopItem : MonoBehaviour
 
     private void CheckClick()
     {
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("Menu");
     }
     private void BuyItem(int index, int itemIndex)
     {
