@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -14,9 +15,14 @@ public class InGameItem : MonoBehaviour
     [SerializeField] private TextMeshProUGUI txtQuantityBlood;
     [SerializeField] private TextMeshProUGUI txtQuantityMana;
     [SerializeField] private TextMeshProUGUI txtQuantityShield;
+    [SerializeField] private int healBlood;
+    [SerializeField] private int healMana;
+    [SerializeField] private int healShield;
+    private Player player;
 
     private void Awake()
     {
+        this.player = FindFirstObjectByType<Player>();
         this.bntBlood = GameObject.Find("BloodItem").GetComponent<Button>();
         this.bntMana = GameObject.Find("ManaItem").GetComponent<Button>();
         this.bntShield = GameObject.Find("ShieldItem").GetComponent<Button>();
@@ -25,50 +31,52 @@ public class InGameItem : MonoBehaviour
         this.txtQuantityShield = GameObject.Find("txtShieldItem").GetComponent<TextMeshProUGUI>();
         this.LoadData();
         this.bntBlood.onClick.AddListener(this.ClickBlood);
+        this.bntMana.onClick.AddListener(this.ClickMana);
+        this.bntShield.onClick.AddListener(this.ClickShield);
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        this.healBlood = 100;
+        this.healMana = 50;
+        this.healShield = 50;
         this.UpdateQuantityItem();
 
     }
 
-    private void ClickBlood()
+    private void UseItem(int indexItem, int quantity, TextMeshProUGUI txtQuantity, int healAmout, Action<int> updatePlayerScore)
     {
-
-        var updateBlood = SaveGame.Instance.saveData.bloodItem[0, 0];
-        if (updateBlood >= 0)
+        var item = SaveGame.Instance.saveData.bloodItem[0, indexItem];
+        if (quantity > 0)
         {
-            updateBlood--;
-            this.quantityBlood = updateBlood;
-            SaveGame.Instance.saveData.bloodItem[0, 0] = quantityBlood;
+            item--;
+            quantity = item;
+            SaveGame.Instance.saveData.bloodItem[0, indexItem] = quantity;
+            txtQuantity.text = quantity.ToString();
             SaveGame.Instance.Save();
-            this.Updatetxt();
-            Debug.Log(quantityBlood);
+            updatePlayerScore(healAmout);
         }
         else
         {
-            Debug.Log("Het mau");
+            Debug.Log("Het mana");
         }
-
-
     }
 
-    private void Updatetxt()
+    private void ClickBlood()
     {
-        this.txtQuantityBlood.text = quantityBlood.ToString();
+        UseItem(0, quantityBlood, txtQuantityBlood, healBlood, (healBlood) => this.player.CurrentScoreHeal += healBlood);
     }
-
 
     private void ClickMana()
     {
-
+        UseItem(0, quantityMana, txtQuantityMana, healMana, (healMana) => this.player.CurrentScoreMana += healMana);
     }
 
-    private void ClickShied()
+    private void ClickShield()
     {
-
+        UseItem(0, quantityShield, txtQuantityShield, healShield, (healShield) => this.player.CurrentScoreShield += healShield);
     }
+
     private void UpdateQuantityItem()
     {
         this.txtQuantityBlood.text = this.quantityBlood.ToString();

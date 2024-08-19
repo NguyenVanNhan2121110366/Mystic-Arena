@@ -50,6 +50,13 @@ public class Character : MonoBehaviour
         healBar.fillAmount = Mathf.Lerp(healBar.fillAmount, currentScoreHeal / maxScoreHeal, 9 * Time.deltaTime);
         manaBar.fillAmount = Mathf.Lerp(manaBar.fillAmount, currentScoreMana / maxScoreMana, 9 * Time.deltaTime);
         shieldBar.fillAmount = Mathf.Lerp(shieldBar.fillAmount, currentScoreShield / maxScoreShield, 9 * Time.deltaTime);
+
+        currentScoreHeal = currentScoreHeal > maxScoreHeal ? maxScoreHeal : currentScoreHeal;
+        currentScoreMana = currentScoreMana > maxScoreMana ? maxScoreMana : currentScoreMana;
+        currentScoreShield = currentScoreShield > maxScoreShield ? maxScoreShield : currentScoreShield;
+        currentScoreHeal = currentScoreHeal < 0 ? 0 : currentScoreHeal;
+        currentScoreMana = currentScoreMana < 0 ? 0 : currentScoreMana;
+        currentScoreShield = currentScoreShield < 0 ? 0 : currentScoreShield;
     }
 
     public void UpdateScoreBar()
@@ -63,13 +70,8 @@ public class Character : MonoBehaviour
         currentScoreGold += scoreGold;
 
         currentScoreShield += scoreShield;
-        
-        currentScoreHeal = currentScoreHeal > maxScoreHeal ? maxScoreHeal : currentScoreHeal;
-        currentScoreMana = currentScoreMana > maxScoreMana ? maxScoreMana : currentScoreMana;
-        currentScoreShield = currentScoreShield > maxScoreShield ? maxScoreShield : currentScoreShield;
-        currentScoreHeal = currentScoreHeal < 0 ? 0 : currentScoreHeal;
-        currentScoreMana = currentScoreMana < 0 ? 0 : currentScoreMana;
-        currentScoreShield = currentScoreShield < 0 ? 0 : currentScoreShield;
+
+
 
     }
 
