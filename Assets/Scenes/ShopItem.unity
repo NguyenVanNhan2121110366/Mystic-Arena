@@ -2130,7 +2130,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -6.7137527, y: 0.83921814}
+  m_Offset: {x: 393.8, y: 0.83921814}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -4788,7 +4788,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -6.7137527, y: 0.83921814}
+  m_Offset: {x: 196.98, y: 0.83921814}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -4966,6 +4966,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a95f8ac7b52fce4886987e866fdf6ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bntContinue: {fileID: 0}
 --- !u!114 &1669293014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4998,6 +4999,7 @@ MonoBehaviour:
     - 0
     - 0
     - 0
+    isCheck: 0000000000
 --- !u!4 &1669293015
 Transform:
   m_ObjectHideFlags: 0
