@@ -12,6 +12,7 @@ public class SaveData
     public float[] scoreMana = new float[5];
     public int[,] bloodItem = new int[5, 5];
     public bool[] isCheck = new bool[5];
+    public bool[] checkBuySkill = new bool[5];
 }
 
 public class SaveGame : MonoBehaviour
@@ -33,7 +34,7 @@ public class SaveGame : MonoBehaviour
 
     public void Save()
     {
-        var dataPath = Application.persistentDataPath + "/gamedatas.data";
+        var dataPath = Application.persistentDataPath + "/gamedata.data";
         var binary = new BinaryFormatter();
         var fileStream = File.Open(dataPath, FileMode.OpenOrCreate);
         binary.Serialize(fileStream, saveData);
@@ -42,7 +43,7 @@ public class SaveGame : MonoBehaviour
 
     public void Load()
     {
-        var dataPath = Application.persistentDataPath + "/gamedatas.data";
+        var dataPath = Application.persistentDataPath + "/gamedata.data";
         if (File.Exists(dataPath))
         {
             var binary = new BinaryFormatter();
