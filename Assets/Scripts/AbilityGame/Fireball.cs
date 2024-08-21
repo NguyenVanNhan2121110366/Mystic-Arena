@@ -103,13 +103,16 @@ public class Fireball : MonoBehaviour
         {
             for (var j = -2; j <= 2; j++)
             {
+                this.allDots.SpawnDestroyEffects(randomCol + i, randomRow + j);
+                // var dot = this.allDots.AllDots[randomCol + i, randomRow + j];
+                // var pos=this.allDots.AllDots[randomCol+i,randomRow+]
                 Destroy(this.allDots.AllDots[randomCol + i, randomRow + j]);
                 StartCoroutine(this.allDots.DestroyMatched());
             }
         }
         yield return null;
         GameStateController.Instance.CurrentGameState = GameState.FillingDot;
-        
+
     }
 
     private void AttackEnemy()

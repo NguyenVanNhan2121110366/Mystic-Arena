@@ -209,7 +209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a1abfd387650cc4fb93c816d8539d14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 1
+  price: 50
   txtPrice: {fileID: 1655611616}
 --- !u!1 &49918748
 GameObject:
@@ -1385,7 +1385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a1abfd387650cc4fb93c816d8539d14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 1
+  price: 100
   txtPrice: {fileID: 786352834}
 --- !u!61 &343255552
 BoxCollider2D:
@@ -1718,12 +1718,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c90dc98b49db6540b602b6f5dc4cecf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goldPlayer: 0
-  txtGold: {fileID: 1416644478}
-  bntTest: {fileID: 471686593}
-  currentGold: 0
   bntBuyBlood: {fileID: 0}
-  countItemsBlood: 0
   bntBuyMana: {fileID: 0}
   bntBuyShield: {fileID: 0}
 --- !u!4 &527235074
@@ -5000,6 +4995,8 @@ MonoBehaviour:
     - 0
     - 0
     isCheck: 0000000000
+    checkBuySkill: 0000000000
+    checkFill: 0101010101
 --- !u!4 &1669293015
 Transform:
   m_ObjectHideFlags: 0
@@ -5500,7 +5497,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a1abfd387650cc4fb93c816d8539d14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 1
+  price: 30
   txtPrice: {fileID: 201744405}
 --- !u!61 &2100806937
 BoxCollider2D:

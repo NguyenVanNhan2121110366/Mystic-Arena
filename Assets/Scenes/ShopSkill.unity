@@ -209,7 +209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a1abfd387650cc4fb93c816d8539d14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 1
+  price: 300
   txtPrice: {fileID: 1655611616}
 --- !u!1 &49918748
 GameObject:
@@ -1037,7 +1037,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a1abfd387650cc4fb93c816d8539d14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 1
+  price: 600
   txtPrice: {fileID: 786352834}
 --- !u!1 &441337836
 GameObject:
@@ -1339,7 +1339,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a835e585b09673546b9bf99b0692da83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  txtGold: {fileID: 0}
   bntBuyAbilityFireBall: {fileID: 0}
   bntBuyAbilityHealBlood: {fileID: 0}
   bntBuyAbilityLightningBolt: {fileID: 0}
@@ -6017,7 +6016,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a1abfd387650cc4fb93c816d8539d14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 1
+  price: 900
   txtPrice: {fileID: 201744405}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

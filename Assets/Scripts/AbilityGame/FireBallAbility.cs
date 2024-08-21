@@ -23,6 +23,7 @@ public class FireBallAbility : Ability
             this.UpdateMana();
             this.SpawnFireBall();
             Invoke(nameof(SpawnFireBallAttackDot), 2f);
+            Player.Instance.animator.SetTrigger("ExcutedSkill");
         }
     }
 

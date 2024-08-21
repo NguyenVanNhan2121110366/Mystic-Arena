@@ -9,7 +9,8 @@ public class Ability : MonoBehaviour
 
     protected virtual void ExcuteAbility()
     {
-        GameStateController.Instance.CurrentGameState = GameState.ExcuteAbility;
+        if (TurnController.Instance.CurrentTurn == GameTurn.Player)
+            GameStateController.Instance.CurrentGameState = GameState.ExcuteAbility;
     }
     protected virtual bool CheckCanUseAbility()
     {

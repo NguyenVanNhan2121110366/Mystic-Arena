@@ -125,12 +125,7 @@ public class AllDotController : MonoBehaviour
 
     #region Spawn Effects
 
-    private void SpawnEffects(Dot dot)
-    {
-        //dot = GetComponent<DotInteraction>();
-
-    }
-    private int GetEffects(GameObject dot)
+    public int GetEffects(GameObject dot)
     {
         var index = 0;
         switch (dot.tag)
@@ -162,12 +157,14 @@ public class AllDotController : MonoBehaviour
         var dot = this.allDots[column, row];
         if (this.allDots[column, row].GetComponent<DotInteraction>().IsMatched)
         {
-            var effectDot = this.GetEffects(dot);
-            var position = dot.transform.position;
+            this.SpawnDestroyEffects(column, row);
+            // var effectDot = this.GetEffects(dot);
+            // var position = dot.transform.position;
             Destroy(dot);
             this.allDots[column, row] = null;
-            var objEffect = Instantiate(allEffects[effectDot], position, Quaternion.identity);
-            Destroy(objEffect, 1f);
+            // var objEffect = Instantiate(allEffects[effectDot], position, Quaternion.identity);
+            // Destroy(objEffect, 1f);
+            
         }
     }
 
@@ -181,12 +178,21 @@ public class AllDotController : MonoBehaviour
             {
                 if (this.allDots[i, j] != null)
                 {
-                   // this.SpawnEffects(this.allGrids[i, j].GetComponent<Dot>());
                     this.DestroyMatchedAt(i, j);
+                    //this.SpawnDestroyEffects(i, j);
                 }
             }
         }
         StartCoroutine(MakeFallingDot());
+    }
+
+    public void SpawnDestroyEffects(int column, int row)
+    {
+        var dot = this.allDots[column, row];
+        var effectDot = this.GetEffects(dot);
+        var position = dot.transform.position;
+        var objEffect = Instantiate(allEffects[effectDot], position, Quaternion.identity);
+        Destroy(objEffect, 1f);
     }
 
     private IEnumerator MakeFallingDot()
