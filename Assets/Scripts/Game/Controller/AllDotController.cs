@@ -171,6 +171,7 @@ public class AllDotController : MonoBehaviour
         }
     }
 
+
     public IEnumerator DestroyMatched()
     {
         yield return new WaitForSeconds(0.5f);
@@ -180,9 +181,8 @@ public class AllDotController : MonoBehaviour
             {
                 if (this.allDots[i, j] != null)
                 {
-                    this.SpawnEffects(this.allGrids[i, j].GetComponent<Dot>());
+                   // this.SpawnEffects(this.allGrids[i, j].GetComponent<Dot>());
                     this.DestroyMatchedAt(i, j);
-
                 }
             }
         }

@@ -13,6 +13,8 @@ public class SaveData
     public int[,] bloodItem = new int[5, 5];
     public bool[] isCheck = new bool[5];
     public bool[] checkBuySkill = new bool[5];
+    public bool[] checkFill = new bool[] { true, true, true, true, true };
+
 }
 
 public class SaveGame : MonoBehaviour

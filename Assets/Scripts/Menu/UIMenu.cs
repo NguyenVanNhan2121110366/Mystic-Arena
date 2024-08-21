@@ -42,6 +42,7 @@ public class UIMenu : MonoBehaviour
         this.bntVolume.onClick.AddListener(ClickVolume);
         this.bntVolumeOff.onClick.AddListener(ClickVolumeOff);
         this.bntExit.onClick.AddListener(ClickExit);
+        this.bntShopSkill.onClick.AddListener(this.ClickShopSkill);
     }
     private void Start()
     {
@@ -106,7 +107,7 @@ public class UIMenu : MonoBehaviour
 
     private void ClickShopSkill()
     {
-
+        SceneManager.LoadScene("ShopSkill");
     }
     private void ClickExit()
     {

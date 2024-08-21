@@ -16,6 +16,7 @@ public class ShopItem : ShopManager
         this.bntBuyMana = GameObject.Find("ButtonMana").GetComponent<Button>();
         this.bntBuyShield = GameObject.Find("ButtonShield").GetComponent<Button>();
         this.bntTest = GameObject.Find("Button").GetComponent<Button>();
+        this.txtGold = GameObject.Find("txtGold").GetComponent<TextMeshProUGUI>();
         if (bntTest != null)
             this.bntTest.onClick.AddListener(this.CheckClick);
         this.LoadDataGold();

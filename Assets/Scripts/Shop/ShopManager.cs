@@ -6,18 +6,11 @@ using System;
 public class ShopManager : MonoBehaviour
 {
     protected int goldPlayer;
-    [SerializeField] private TextMeshProUGUI txtGold;
+    protected TextMeshProUGUI txtGold;
     protected Button bntTest;
     protected Item item;
     public int GoldPlayer { get => goldPlayer; set => goldPlayer = value; }
 
-    private void Awake()
-    {
-        this.txtGold = GameObject.Find("txtGold").GetComponent<TextMeshProUGUI>();
-        this.item = FindFirstObjectByType<Item>();
-        // this.LoadDataGold();
-    }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         this.LoadGold();

@@ -147,7 +147,9 @@ public class Player : Character
                 if (CurrentScoreShield > 0)
                 {
                     this.CurrentScoreShield -= Enemy.Instance.ScoreAttack;
-
+                    var remainingdame = Enemy.Instance.ScoreAttack - CurrentScoreShield;
+                    if (remainingdame > 0)
+                        this.CurrentScoreHeal -= remainingdame;
                 }
                 if (CurrentScoreShield <= 0)
                 {

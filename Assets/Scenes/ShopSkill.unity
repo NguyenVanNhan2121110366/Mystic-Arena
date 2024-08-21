@@ -1339,10 +1339,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a835e585b09673546b9bf99b0692da83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  txtGold: {fileID: 1416644478}
+  txtGold: {fileID: 0}
   bntBuyAbilityFireBall: {fileID: 0}
   bntBuyAbilityHealBlood: {fileID: 0}
   bntBuyAbilityLightningBolt: {fileID: 0}
+  fillHealBlood: {fileID: 788300546}
+  fillLightningBolt: {fileID: 1809415935}
 --- !u!1 &534863587
 GameObject:
   m_ObjectHideFlags: 0
@@ -5301,6 +5303,7 @@ MonoBehaviour:
     - 0
     isCheck: 0000000000
     checkBuySkill: 0000000000
+    checkFill: 0000000000
 --- !u!4 &1669293015
 Transform:
   m_ObjectHideFlags: 0

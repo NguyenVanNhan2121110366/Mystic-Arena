@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class SaveAllData : MonoBehaviour
 {
     [SerializeField] private Button bntContinue;
-   
+
 
     private void Start()
     {
@@ -27,6 +27,12 @@ public class SaveAllData : MonoBehaviour
         SaveGame.Instance.saveData.bloodItem[0, 0] = 0;
         SaveGame.Instance.saveData.bloodItem[0, 1] = 0;
         SaveGame.Instance.saveData.bloodItem[0, 2] = 0;
+
+        
+        SaveGame.Instance.saveData.checkFill[0] = true;
+        SaveGame.Instance.saveData.checkBuySkill[0] = false;
+        SaveGame.Instance.saveData.checkBuySkill[1] = false;
+        SaveGame.Instance.saveData.checkBuySkill[2] = false;
         SaveGame.Instance.Save();
     }
     public void SaveAllDataGame()
