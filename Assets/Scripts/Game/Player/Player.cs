@@ -62,7 +62,7 @@ public class Player : Character
         // }
         if (SaveGame.Instance.saveData.isCheck[1])
         {
-            this.saveAllData.LoadAllDataGame();
+            this.saveAllData.LoadDataPlayer();
             SaveGame.Instance.saveData.isCheck[1] = false;
             SaveGame.Instance.Save();
         }
@@ -93,6 +93,7 @@ public class Player : Character
             this.isIdle = false;
             if (this.isMoving && !isAttack && !isBackToBase)
             {
+                this.targetEnemy = GameObject.Find("TargetEnemy").GetComponent<Transform>();
                 this.isIdle = false;
                 transform.position = Vector2.Lerp(transform.position, targetEnemy.position, 9 * Time.deltaTime);
 

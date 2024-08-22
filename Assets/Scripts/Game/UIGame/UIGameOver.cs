@@ -9,8 +9,10 @@ public class UIGameOver : MonoBehaviour
     [SerializeField] private Button bntRestart;
     [SerializeField] private GameObject fillGameOver;
     [SerializeField] private GameObject gameOver;
+    private SaveAllData save;
     private void Awake()
     {
+        this.save = FindAnyObjectByType<SaveAllData>();
         this.allData = FindFirstObjectByType<SaveAllData>();
         this.gameOver = GameObject.Find("GameOver");
         this.fillGameOver = GameObject.Find("Fill");
@@ -22,6 +24,7 @@ public class UIGameOver : MonoBehaviour
 
     private void ClickHome()
     {
+        this.save.SaveDataGoldPlayer();
         Time.timeScale = 1;
         SceneManager.LoadScene("Menu");
     }
@@ -32,8 +35,8 @@ public class UIGameOver : MonoBehaviour
         {
             this.fillGameOver.SetActive(false);
             this.gameOver.SetActive(false);
-            
-            this.allData.LoadAllDataGame();
+            Time.timeScale = 1;
+            this.allData.LoadDataPlayer();
         }
         else
         {

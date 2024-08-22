@@ -26,8 +26,10 @@ public class Enemy : Character
     [SerializeField] private Vector2 posPlayer;
     [SerializeField] private GameObject winGame;
     [SerializeField] private GameObject fillWinGame;
+    [SerializeField] private int dameEnemy;
     private ScoreController scoreController;
     public bool IsMoving { get => isMoving; set => isMoving = value; }
+    public int DameEnemy { get => dameEnemy; set => dameEnemy = value; }
     private void Awake()
     {
         this.winGame = GameObject.Find("WinGame");
@@ -116,8 +118,12 @@ public class Enemy : Character
         ScoreHeal = this.scoreController.ScoreHeal;
         ScoreMana = this.scoreController.ScoreMana;
         ScoreAttack = this.scoreController.ScoreAttack;
-        ScoreGold = this.scoreController.ScoreGold;
+        ScoreGold = 0;
         ScoreShield = this.scoreController.ScoreShield;
+        if (ScoreAttack > 0)
+        {
+            ScoreAttack += this.dameEnemy;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)

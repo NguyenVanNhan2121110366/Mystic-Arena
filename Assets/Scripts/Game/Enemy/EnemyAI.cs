@@ -17,7 +17,7 @@ public class EnemyAI : MonoBehaviour
     }
     private void Start()
     {
-        
+
         this.isTurnEnemy = false;
 
     }
@@ -29,7 +29,7 @@ public class EnemyAI : MonoBehaviour
             this.allMoves.Clear();
             this.GetAllTag();
             this.FindAllMatchedWidth();
-            //this.FindAllMatchedHeight();
+            this.FindAllMatchedHeight();
             StartCoroutine(this.RandomMoveDot());
             this.isTurnEnemy = false;
         }
@@ -37,7 +37,7 @@ public class EnemyAI : MonoBehaviour
 
     private IEnumerator RandomMoveDot()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(.5f);
         var randomIndex = Random.Range(0, this.allMoves.Count);
         var moveDot = this.allMoves[randomIndex];
         var originDot = this.allDot.AllDots[moveDot.OriginDotCol, moveDot.OriginDotRow];
@@ -214,7 +214,7 @@ public class EnemyAI : MonoBehaviour
         var leftDot2 = i - 2 >= 0 ? this.allTags[i - 2, j + k] : string.Empty;
 
         var rightDot = i + 1 < this.allDot.Width ? this.allTags[i + 1, j + k] : string.Empty;
-        var rightDot2 = i + 2 < this.allDot.Width ? this.allTags[i + 2, j] : string.Empty;
+        var rightDot2 = i + 2 < this.allDot.Width ? this.allTags[i + 2, j + k] : string.Empty;
 
         if (originDot == leftDot)
         {

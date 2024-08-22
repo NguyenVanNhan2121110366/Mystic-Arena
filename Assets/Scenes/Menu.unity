@@ -2192,6 +2192,9 @@ MonoBehaviour:
     - 0
     - 0
     isCheck: 0000000000
+    checkBuySkill: 0000000000
+    checkFill: 0101010101
+    currentLevel: 0000000000000000000000000000000000000000
 --- !u!114 &1954456292
 MonoBehaviour:
   m_ObjectHideFlags: 0

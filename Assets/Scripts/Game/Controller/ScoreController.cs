@@ -7,6 +7,7 @@ public class ScoreController : MonoBehaviour
     [SerializeField] private float scoreGold;
     [SerializeField] private float scoreShield;
     [SerializeField] private float scoreLevel;
+    [SerializeField] private int dameAttack;
     public float ScoreHeal { get => scoreHeal; set => scoreHeal = value; }
     public float ScoreMana { get => scoreMana; set => scoreMana = value; }
     public float ScoreAttack { get => scoreAttack; set => scoreAttack = value; }

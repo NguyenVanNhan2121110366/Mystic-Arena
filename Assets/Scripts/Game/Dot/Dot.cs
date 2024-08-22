@@ -42,6 +42,7 @@ public class Dot : MonoBehaviour
         }
         if (dotTag == "Gold")
         {
+
             if (Player.Instance != null)
                 this.checkScoreGold += Player.Instance.CheckScoreGold();
             this.scoreController.ScoreGold += this.score;

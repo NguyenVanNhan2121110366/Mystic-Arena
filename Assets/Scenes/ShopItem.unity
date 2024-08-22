@@ -209,7 +209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a1abfd387650cc4fb93c816d8539d14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 50
+  price: 10
   txtPrice: {fileID: 1655611616}
 --- !u!1 &49918748
 GameObject:
@@ -1385,7 +1385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a1abfd387650cc4fb93c816d8539d14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 100
+  price: 20
   txtPrice: {fileID: 786352834}
 --- !u!61 &343255552
 BoxCollider2D:
@@ -4961,7 +4961,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a95f8ac7b52fce4886987e866fdf6ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bntContinue: {fileID: 0}
 --- !u!114 &1669293014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4997,6 +4996,7 @@ MonoBehaviour:
     isCheck: 0000000000
     checkBuySkill: 0000000000
     checkFill: 0101010101
+    currentLevel: 0000000000000000000000000000000000000000
 --- !u!4 &1669293015
 Transform:
   m_ObjectHideFlags: 0
@@ -5497,7 +5497,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a1abfd387650cc4fb93c816d8539d14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 30
+  price: 10
   txtPrice: {fileID: 201744405}
 --- !u!61 &2100806937
 BoxCollider2D:

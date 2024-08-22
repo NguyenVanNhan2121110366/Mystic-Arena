@@ -25,17 +25,18 @@ public class AllDotController : MonoBehaviour
     {
         this.spawnEnemy = FindFirstObjectByType<SpawnEnemy>();
         this.scoreController = FindFirstObjectByType<ScoreController>();
+        
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+
         this.allDots = new GameObject[this.width, this.height];
         this.allGrids = new GameObject[this.width, this.height];
         this.GetAllDotToArray();
         StartCoroutine(this.CreateDotAndGrid());
-        // if (SaveGame.Instance.saveData.currentLevel[0] == 0)
-        //     this.spawnEnemy.ChooseEnemySpawn();
+
     }
 
     private void GetAllDotToArray()
