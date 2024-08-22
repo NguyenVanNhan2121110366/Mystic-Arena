@@ -26,11 +26,15 @@ public class Player : Character
     [SerializeField] private Quaternion rotationPlayer;
     [SerializeField] private Vector2 posPlayer;
     [SerializeField] private TextMeshProUGUI txtScoreGold;
+    [SerializeField] private GameObject gameOver;
+    [SerializeField] private GameObject fillGameOver;
 
     private SaveAllData saveAllData;
     public bool IsMoving { get => isMoving; set => isMoving = value; }
     private void Awake()
     {
+        this.gameOver = GameObject.Find("GameOver");
+        this.fillGameOver = GameObject.Find("Fill");
         this.saveAllData = FindFirstObjectByType<SaveAllData>();
         this.txtScoreGold = GameObject.Find("ScoreGold").GetComponent<TextMeshProUGUI>();
         this.scoreController = FindFirstObjectByType<ScoreController>();
@@ -43,17 +47,19 @@ public class Player : Character
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        this.fillGameOver.SetActive(false);
+        this.gameOver.SetActive(false);
         CurrentScoreHeal = MaxScoreHeal;
         CurrentScoreMana = 50f;
         CurrentScoreShield = 0f;
         this.rotationPlayer = transform.rotation;
         this.posPlayer = transform.position;
         this.CurrentGold = 0;
-        if (SaveGame.Instance.saveData.isCheck[0])
-        {
-            SaveGame.Instance.saveData.isCheck[0] = false;
-            SaveGame.Instance.Save();
-        }
+        // if (SaveGame.Instance.saveData.isCheck[0])
+        // {
+        //     SaveGame.Instance.saveData.isCheck[0] = false;
+        //     SaveGame.Instance.Save();
+        // }
         if (SaveGame.Instance.saveData.isCheck[1])
         {
             this.saveAllData.LoadAllDataGame();
@@ -140,28 +146,46 @@ public class Player : Character
     {
         if (other.CompareTag("AttackPlayer"))
         {
-            this.animator.SetTrigger("Hit");
+
             if (CurrentScoreHeal > 0)
             {
                 Debug.Log("Test AttackPlayer");
                 if (CurrentScoreShield > 0)
                 {
+
                     this.CurrentScoreShield -= Enemy.Instance.ScoreAttack;
                     var remainingdame = Enemy.Instance.ScoreAttack - CurrentScoreShield;
                     if (remainingdame > 0)
+                    {
                         this.CurrentScoreHeal -= remainingdame;
+                        if (CurrentScoreHeal <= 0)
+                        {
+                            StartCoroutine(GameOver());
+                        }
+                    }
+
                 }
                 if (CurrentScoreShield <= 0)
                 {
                     this.CurrentScoreHeal -= Enemy.Instance.ScoreAttack;
+                    if (CurrentScoreHeal <= 0)
+                    {
+                        StartCoroutine(GameOver());
+                    }
                 }
+                if (CurrentScoreHeal > 0)
+                    this.animator.SetTrigger("Hit");
             }
         }
     }
 
+    private IEnumerator GameOver()
+    {
+        animator.SetBool("Die", true);
+        yield return new WaitForSeconds(2f);
+        this.gameOver.SetActive(true);
+        this.fillGameOver.SetActive(true);
+        Time.timeScale = 0;
+    }
 
-    // public void PlusScoreGold()
-    // {
-    //     this.txtScoreGold.text = " X " + CheckScoreGold();
-    // }
 }

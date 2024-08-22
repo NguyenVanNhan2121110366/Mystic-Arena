@@ -59,7 +59,7 @@ public class Fireball : MonoBehaviour
                 }
             }
             else
-                transform.position = Vector2.MoveTowards(transform.position, this.posAttackEnemy.transform.position, 9 * Time.deltaTime);
+                transform.position = Vector2.MoveTowards(transform.position, this.posAttackEnemy.transform.position, 15 * Time.deltaTime);
         }
     }
 
@@ -85,7 +85,7 @@ public class Fireball : MonoBehaviour
                 }
             }
             else
-                transform.position = Vector2.MoveTowards(transform.position, dotTarget.transform.position, 9 * Time.deltaTime);
+                transform.position = Vector2.MoveTowards(transform.position, dotTarget.transform.position, 15 * Time.deltaTime);
         }
     }
 

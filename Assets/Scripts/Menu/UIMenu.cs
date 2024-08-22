@@ -1,4 +1,4 @@
-using System.Diagnostics;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -56,15 +56,21 @@ public class UIMenu : MonoBehaviour
     {
         SceneManager.LoadScene("Game");
         this.saveAllData.ResetData();
-        this.checkNewGame = true;
-        this.SaveValueIsCheck(0, checkNewGame);
+        //this.checkNewGame = true;
+        //this.SaveValueIsCheck(0, checkNewGame);
     }
 
     private void ClickContinue()
     {
-        SceneManager.LoadScene("Game");
-        this.checkContinue = true;
-        this.SaveValueIsCheck(1, checkContinue);
+        if (SaveGame.Instance.saveData.scoreBlood[0] > 0)
+        {
+            SceneManager.LoadScene("Game");
+            this.checkContinue = true;
+            this.SaveValueIsCheck(1, checkContinue);
+        }
+        else
+            return;
+
     }
 
     private void ClickVolume()

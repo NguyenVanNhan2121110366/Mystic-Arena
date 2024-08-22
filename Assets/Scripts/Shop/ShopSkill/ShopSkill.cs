@@ -9,7 +9,7 @@ public class ShopSkill : ShopManager
     [SerializeField] private Button bntBuyAbilityHealBlood;
     [SerializeField] private Button bntBuyAbilityLightningBolt;
     [SerializeField] private GameObject fillHealBlood;
-    [SerializeField] private GameObject fillLightningBolt;
+    [SerializeField] private GameObject fillFireball;
 
     private void Awake()
     {
@@ -37,14 +37,20 @@ public class ShopSkill : ShopManager
         SceneManager.LoadScene("Menu");
     }
 
-    private void ClickBuyAbilityFireBall()
+    private void ClickBuyAbilityLightningBolt()
     {
         if (!SaveGame.Instance.saveData.checkBuySkill[0])
         {
-            this.BuySkill(0, true);
-            SaveGame.Instance.saveData.checkFill[0] = false;
-            this.fillHealBlood.SetActive(SaveGame.Instance.saveData.checkFill[0]);
-            SaveGame.Instance.Save();
+            if (goldPlayer >= item.Price)
+            {
+                this.BuySkill(0, true);
+                SaveGame.Instance.saveData.checkFill[0] = false;
+                this.fillHealBlood.SetActive(SaveGame.Instance.saveData.checkFill[0]);
+                SaveGame.Instance.Save();
+            }
+            else
+                Debug.Log("Khong du tien");
+
         }
         else
             Debug.Log("Bạn đã mua kỹ năng này rồi");
@@ -55,7 +61,7 @@ public class ShopSkill : ShopManager
         if (SaveGame.Instance.saveData.checkBuySkill[0] && !SaveGame.Instance.saveData.checkBuySkill[1])
         {
             this.BuySkill(1, true);
-            this.fillLightningBolt.SetActive(SaveGame.Instance.saveData.checkFill[0]);
+            this.fillFireball.SetActive(SaveGame.Instance.saveData.checkFill[0]);
         }
         else if (!SaveGame.Instance.saveData.checkBuySkill[0])
             Debug.Log(" Cần phải học kỹ năng FireBall trước");
@@ -65,7 +71,7 @@ public class ShopSkill : ShopManager
         }
     }
 
-    private void ClickBuyAbilityLightningBolt()
+    private void ClickBuyAbilityFireBall()
     {
         if (SaveGame.Instance.saveData.checkBuySkill[1] && !SaveGame.Instance.saveData.checkBuySkill[2])
         {
