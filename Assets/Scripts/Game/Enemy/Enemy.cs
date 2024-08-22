@@ -24,10 +24,14 @@ public class Enemy : Character
     [SerializeField] private GameObject attackRate;
     [SerializeField] private Quaternion rotationPlayer;
     [SerializeField] private Vector2 posPlayer;
+    [SerializeField] private GameObject winGame;
+    [SerializeField] private GameObject fillWinGame;
     private ScoreController scoreController;
     public bool IsMoving { get => isMoving; set => isMoving = value; }
     private void Awake()
     {
+        this.winGame = GameObject.Find("WinGame");
+        this.fillWinGame = GameObject.Find("Fill");
         this.scoreController = FindFirstObjectByType<ScoreController>();
         this.shieldBar = GameObject.Find("ShieldBarEnemy").GetComponent<Image>();
         this.healBar = GameObject.Find("HealBarEnemy").GetComponent<Image>();
@@ -38,6 +42,8 @@ public class Enemy : Character
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        this.winGame.SetActive(false);
+        this.fillWinGame.SetActive(false);
         this.CurrentScoreHeal = this.MaxScoreHeal;
         this.CurrentScoreMana = 50f;
         this.rotationPlayer = transform.rotation;
@@ -118,9 +124,10 @@ public class Enemy : Character
     {
         if (other.CompareTag("AttackEnemy"))
         {
-            this.animator.SetTrigger("Hit");
+
             if (CurrentScoreHeal > 0)
             {
+                this.animator.SetTrigger("Hit");
                 Debug.Log("Test AttackEnemy");
                 if (CurrentScoreShield > 0)
                 {
@@ -128,13 +135,27 @@ public class Enemy : Character
                     var remainingdame = Player.Instance.ScoreAttack - CurrentScoreShield;
                     if (remainingdame > 0)
                         CurrentScoreHeal -= remainingdame;
+
                 }
-                if (CurrentScoreShield <= 0)
+                else
                 {
                     this.CurrentScoreHeal -= Player.Instance.ScoreAttack;
                 }
 
             }
+            if (CurrentScoreHeal <= 0)
+            {
+                StartCoroutine(this.WinGame());
+            }
         }
+    }
+
+    private IEnumerator WinGame()
+    {
+        yield return new WaitForSeconds(0.5f);
+        this.winGame.SetActive(true);
+        this.fillWinGame.SetActive(true);
+        Destroy(gameObject);
+        Time.timeScale = 0;
     }
 }

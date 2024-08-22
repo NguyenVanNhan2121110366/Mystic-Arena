@@ -18,10 +18,7 @@ public class TurnController : MonoBehaviour
     [SerializeField] private int turn;
     private EnemyAI enemyAI;
     public GameTurn CurrentTurn { get => currentTurn; set => currentTurn = value; }
-    private void Awake()
-    {
-        this.enemyAI = FindFirstObjectByType<EnemyAI>();
-    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -53,8 +50,9 @@ public class TurnController : MonoBehaviour
     }
     private void SetNewTurn()
     {
-        //this.enemyAI.AutoTurn();
-        FindFirstObjectByType<EnemyAI>().AutoTurn();
+        this.enemyAI = FindFirstObjectByType<EnemyAI>();
+        if (this.enemyAI != null)
+            FindFirstObjectByType<EnemyAI>().AutoTurn();
     }
     private void SwitchTurn()
     {

@@ -9,6 +9,7 @@ public class AllDotController : MonoBehaviour
     [SerializeField] private Transform parentObj;
     [SerializeField] private GameObject girdPrefab;
     [SerializeField] private GameObject[] allEffects;
+    private SpawnEnemy spawnEnemy;
     private GameObject[,] allGrids;
     private GameObject[,] allDots;
     private ScoreController scoreController;
@@ -22,6 +23,7 @@ public class AllDotController : MonoBehaviour
 
     private void Awake()
     {
+        this.spawnEnemy = FindFirstObjectByType<SpawnEnemy>();
         this.scoreController = FindFirstObjectByType<ScoreController>();
     }
 
@@ -32,7 +34,8 @@ public class AllDotController : MonoBehaviour
         this.allGrids = new GameObject[this.width, this.height];
         this.GetAllDotToArray();
         StartCoroutine(this.CreateDotAndGrid());
-
+        // if (SaveGame.Instance.saveData.currentLevel[0] == 0)
+        //     this.spawnEnemy.ChooseEnemySpawn();
     }
 
     private void GetAllDotToArray()
@@ -164,7 +167,7 @@ public class AllDotController : MonoBehaviour
             this.allDots[column, row] = null;
             // var objEffect = Instantiate(allEffects[effectDot], position, Quaternion.identity);
             // Destroy(objEffect, 1f);
-            
+
         }
     }
 

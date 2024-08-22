@@ -149,6 +149,7 @@ public class Player : Character
 
             if (CurrentScoreHeal > 0)
             {
+                this.animator.SetTrigger("Hit");
                 Debug.Log("Test AttackPlayer");
                 if (CurrentScoreShield > 0)
                 {
@@ -160,21 +161,18 @@ public class Player : Character
                         this.CurrentScoreHeal -= remainingdame;
                         if (CurrentScoreHeal <= 0)
                         {
-                            StartCoroutine(GameOver());
+
                         }
                     }
 
                 }
-                if (CurrentScoreShield <= 0)
+                else
                 {
                     this.CurrentScoreHeal -= Enemy.Instance.ScoreAttack;
-                    if (CurrentScoreHeal <= 0)
-                    {
-                        StartCoroutine(GameOver());
-                    }
                 }
-                if (CurrentScoreHeal > 0)
-                    this.animator.SetTrigger("Hit");
+                if (CurrentScoreHeal <= 0)
+                    StartCoroutine(GameOver());
+
             }
         }
     }
