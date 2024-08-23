@@ -12,7 +12,7 @@ public class LightingBoltAbility : Ability
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        this.amoutMana = 50;
+        this.amoutMana = 100;
     }
 
     protected override void ExcuteAbility()

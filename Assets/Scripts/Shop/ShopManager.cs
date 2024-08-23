@@ -14,13 +14,7 @@ public class ShopManager : MonoBehaviour
     void Start()
     {
         this.LoadGold();
-        Debug.Log(goldPlayer);
     }
-    private void Update()
-    {
-        Debug.Log(goldPlayer);
-    }
-
 
     protected virtual void LoadGold()
     {
@@ -51,6 +45,8 @@ public class ShopManager : MonoBehaviour
 
     protected virtual void BuySkill(int index, bool isCheck)
     {
+        // Debug.Log(goldPlayer);
+        // Debug.Log(this.item.Price);
         if (goldPlayer >= this.item.Price)
         {
             this.goldPlayer -= this.item.Price;

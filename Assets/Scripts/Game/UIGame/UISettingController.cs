@@ -75,6 +75,7 @@ public class UISettingController : MonoBehaviour
     {
         this.fill.SetActive(false);
         this.settingBar.SetActive(false);
+        this.isCheckSetting = false;
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Time.timeScale = 1;
         //this.save.SaveDataPlayer();

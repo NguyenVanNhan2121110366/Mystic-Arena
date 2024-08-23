@@ -12,7 +12,7 @@ public class FireBallAbility : Ability
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        this.amoutMana = 50;
+        this.amoutMana = 350;
     }
 
     protected override void ExcuteAbility()

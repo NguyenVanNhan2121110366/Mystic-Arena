@@ -12,7 +12,7 @@ public class HealBloodAbility : Ability
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        this.amoutMana = 50;
+        this.amoutMana = 200;
         this.healBlood = 300;
     }
 
@@ -34,7 +34,7 @@ public class HealBloodAbility : Ability
         {
             Player.Instance.CurrentScoreHeal += this.healBlood;
             Enemy.Instance.CurrentScoreHeal -= this.healBlood;
-            GameStateController.Instance.CurrentGameState = GameState.FillingDot;
+            GameStateController.Instance.CurrentGameState = GameState.Finish;
             Enemy.Instance.animator.SetTrigger("Hit");
         }
     }

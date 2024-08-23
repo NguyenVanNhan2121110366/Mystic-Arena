@@ -1385,7 +1385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a1abfd387650cc4fb93c816d8539d14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 20
+  price: 30
   txtPrice: {fileID: 786352834}
 --- !u!61 &343255552
 BoxCollider2D:

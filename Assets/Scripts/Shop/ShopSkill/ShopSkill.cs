@@ -22,6 +22,7 @@ public class ShopSkill : ShopManager
         if (bntTest != null)
             this.bntTest.onClick.AddListener(this.CheckClick);
         this.LoadDataGold();
+        this.LoadDataSkil();
         this.bntBuyAbilityFireBall.onClick.AddListener(this.ClickBuyAbilityFireBall);
         this.bntBuyAbilityHealBlood.onClick.AddListener(this.ClickBuyAbilityHealBlood);
         this.bntBuyAbilityLightningBolt.onClick.AddListener(this.ClickBuyAbilityLightningBolt);
@@ -39,8 +40,11 @@ public class ShopSkill : ShopManager
 
     private void ClickBuyAbilityLightningBolt()
     {
+        this.item.Price = 200;
         if (!SaveGame.Instance.saveData.checkBuySkill[0])
         {
+            Debug.Log(goldPlayer);
+            Debug.Log(this.item.Price);
             if (goldPlayer >= item.Price)
             {
                 this.BuySkill(0, true);
@@ -58,13 +62,18 @@ public class ShopSkill : ShopManager
 
     private void ClickBuyAbilityHealBlood()
     {
+        this.item.Price = 500;
         if (SaveGame.Instance.saveData.checkBuySkill[0] && !SaveGame.Instance.saveData.checkBuySkill[1])
         {
             this.BuySkill(1, true);
             this.fillFireball.SetActive(SaveGame.Instance.saveData.checkFill[0]);
         }
         else if (!SaveGame.Instance.saveData.checkBuySkill[0])
+        {
             Debug.Log(" Cần phải học kỹ năng FireBall trước");
+            Debug.Log(this.item.Price);
+        }
+
         else
         {
             Debug.Log("Bạn đã mua kỹ năng này rồi");
@@ -73,15 +82,26 @@ public class ShopSkill : ShopManager
 
     private void ClickBuyAbilityFireBall()
     {
+        this.item.Price = 900;
         if (SaveGame.Instance.saveData.checkBuySkill[1] && !SaveGame.Instance.saveData.checkBuySkill[2])
         {
             this.BuySkill(2, true);
         }
         else if (!SaveGame.Instance.saveData.checkBuySkill[1])
+        {
             Debug.Log(" Cần phải học kỹ năng HealBlood trước");
+            Debug.Log(this.item.Price);
+        }
         else
         {
             Debug.Log("Bạn đã mua kỹ năng này rồi");
         }
+    }
+
+    private void LoadDataSkil()
+    {
+        SaveGame.Instance.Load();
+        this.fillFireball.SetActive(SaveGame.Instance.saveData.checkFill[0]);
+        this.fillHealBlood.SetActive(SaveGame.Instance.saveData.checkFill[0]);
     }
 }

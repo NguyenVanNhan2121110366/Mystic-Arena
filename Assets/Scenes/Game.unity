@@ -3119,7 +3119,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5330208937137190354, guid: d2cac3010af75dc479bab4383bbbb283, type: 3}
       propertyPath: dameEnemy
-      value: 40
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 5330208937137190354, guid: d2cac3010af75dc479bab4383bbbb283, type: 3}
       propertyPath: maxScoreHeal
@@ -6940,7 +6940,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dotName: 
   dotTag: 
-  score: 20
+  score: 30
   txtScoreGold: {fileID: 0}
   scoreGold: 2
   checkScoreGold: 0
@@ -8084,7 +8084,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dotName: BigSword
   dotTag: 
-  score: 25
+  score: 35
   txtScoreGold: {fileID: 0}
   scoreGold: 2
   checkScoreGold: 0
@@ -9494,7 +9494,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6249861627843486549, guid: 12eed7399fb0e2d4e97d1f3fd23cd6db, type: 3}
       propertyPath: dameEnemy
-      value: 60
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 6249861627843486549, guid: 12eed7399fb0e2d4e97d1f3fd23cd6db, type: 3}
       propertyPath: maxScoreHeal

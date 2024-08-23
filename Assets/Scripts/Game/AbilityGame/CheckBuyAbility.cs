@@ -28,8 +28,8 @@ public class CheckBuyAbility : MonoBehaviour
 
     private void CheckBuy()
     {
-        this.objFireBall.SetActive(SaveGame.Instance.saveData.checkBuySkill[0]);
+        this.objFireBall.SetActive(SaveGame.Instance.saveData.checkBuySkill[2]);
         this.objHealBlood.SetActive(SaveGame.Instance.saveData.checkBuySkill[1]);
-        this.objLightningBolt.SetActive(SaveGame.Instance.saveData.checkBuySkill[2]);
+        this.objLightningBolt.SetActive(SaveGame.Instance.saveData.checkBuySkill[0]);
     }
 }
