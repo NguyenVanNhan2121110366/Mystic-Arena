@@ -11,6 +11,9 @@ public class DotInteraction : MonoBehaviour
     [SerializeField] private int preColumn, preRow;
     [SerializeField] private bool isMatched;
     [SerializeField] private int targetX, targetY;
+    [SerializeField] private GameObject dotClick;
+    [SerializeField] private GameObject obj;
+    private AudioManager audioManager;
     private AllDotController alldots;
     #endregion
     #region Public
@@ -20,6 +23,7 @@ public class DotInteraction : MonoBehaviour
 
     private void Awake()
     {
+        this.audioManager = FindFirstObjectByType<AudioManager>();
         this.alldots = FindFirstObjectByType<AllDotController>();
     }
     #endregion
@@ -36,7 +40,6 @@ public class DotInteraction : MonoBehaviour
         targetY = row;
         this.Find3Matched();
         this.MoveDot();
-
 
     }
 
@@ -114,22 +117,33 @@ public class DotInteraction : MonoBehaviour
             yield return null;
             if (!isMatched && !this.targetDot.GetComponent<DotInteraction>().isMatched)
             {
+                this.audioManager.audioSrc.PlayOneShot(this.audioManager.SoundDestroyFalse);
                 yield return new WaitForSeconds(0.5f);
                 targetDot.GetComponent<DotInteraction>().column = column;
                 targetDot.GetComponent<DotInteraction>().row = row;
                 row = preRow;
                 column = preColumn;
+                // isCheckClick = true;
+                // isCheckTounch = false;
+                // transform.localScale = Vector3.one;
+
                 GameStateController.Instance.CurrentGameState = GameState.Swipe;
             }
             else
             {
                 GameStateController.Instance.CurrentGameState = GameState.FillingDot;
                 StartCoroutine(this.alldots.DestroyMatched());
-                Debug.Log("Destroy");
+                StartCoroutine(this.DelaySound());
             }
             targetDot = null;
 
         }
+    }
+
+    private IEnumerator DelaySound()
+    {
+        yield return new WaitForSeconds(0.5f);
+        this.audioManager.audioSrc.PlayOneShot(this.audioManager.SoundDestroy);
     }
     #region Input
     private string CheckTouch()
@@ -154,39 +168,48 @@ public class DotInteraction : MonoBehaviour
     {
         if (inputDirection == "right" && column + 1 < this.alldots.Width)
         {
+
             targetDot = this.alldots.AllDots[column + 1, row];
             targetDot.GetComponent<DotInteraction>().column -= 1;
             this.SetValue();
             column += 1;
             GameStateController.Instance.CurrentGameState = GameState.CheckingDot;
             Debug.Log("right");
+
+
         }
         if (inputDirection == "left" && column - 1 >= 0)
         {
+
             targetDot = this.alldots.AllDots[column - 1, row];
             targetDot.GetComponent<DotInteraction>().column += 1;
             this.SetValue();
             column -= 1;
             GameStateController.Instance.CurrentGameState = GameState.CheckingDot;
             Debug.Log("left");
+
         }
         if (inputDirection == "up" && row + 1 < this.alldots.Height)
         {
+
             targetDot = this.alldots.AllDots[column, row + 1];
             targetDot.GetComponent<DotInteraction>().row -= 1;
             this.SetValue();
             row += 1;
             GameStateController.Instance.CurrentGameState = GameState.CheckingDot;
             Debug.Log("up");
+
         }
         if (inputDirection == "down" && row - 1 >= 0)
         {
+
             targetDot = this.alldots.AllDots[column, row - 1];
             targetDot.GetComponent<DotInteraction>().row += 1;
             this.SetValue();
             row -= 1;
             GameStateController.Instance.CurrentGameState = GameState.CheckingDot;
             Debug.Log("down");
+
         }
         StartCoroutine(ChecktargetDot());
     }
@@ -202,6 +225,11 @@ public class DotInteraction : MonoBehaviour
         if (TurnController.Instance.CurrentTurn != GameTurn.Player || GameStateController.Instance.CurrentGameState != GameState.Swipe)
             return;
         mouseDown = GetInput();
+        obj = Instantiate(this.dotClick, this.alldots.AllDots[column, row].transform.position, Quaternion.identity);
+    }
+    private void OnMouseExit()
+    {
+        Destroy(obj);
     }
     private void OnMouseUp()
     {
@@ -211,6 +239,8 @@ public class DotInteraction : MonoBehaviour
         var inputDirection = CheckTouch();
         this.GetValueInput(inputDirection);
     }
+
+
     #endregion
 
     private void SetValue()

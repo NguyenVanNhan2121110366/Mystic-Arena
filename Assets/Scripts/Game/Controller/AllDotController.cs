@@ -9,10 +9,11 @@ public class AllDotController : MonoBehaviour
     [SerializeField] private Transform parentObj;
     [SerializeField] private GameObject girdPrefab;
     [SerializeField] private GameObject[] allEffects;
-    private SpawnEnemy spawnEnemy;
+    [SerializeField] private GameObject currentDot;
     private GameObject[,] allGrids;
     private GameObject[,] allDots;
     private ScoreController scoreController;
+    private AudioManager audioManager;
     #endregion
     #region Public
     public int Width { get => width; set => width = value; }
@@ -23,9 +24,8 @@ public class AllDotController : MonoBehaviour
 
     private void Awake()
     {
-        this.spawnEnemy = FindFirstObjectByType<SpawnEnemy>();
         this.scoreController = FindFirstObjectByType<ScoreController>();
-        
+        this.audioManager = FindAnyObjectByType<AudioManager>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -46,14 +46,6 @@ public class AllDotController : MonoBehaviour
             this.dots[i] = this.parentObj.GetChild(i).gameObject;
         }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-
 
     private IEnumerator CreateDotAndGrid()
     {
@@ -162,12 +154,8 @@ public class AllDotController : MonoBehaviour
         if (this.allDots[column, row].GetComponent<DotInteraction>().IsMatched)
         {
             this.SpawnDestroyEffects(column, row);
-            // var effectDot = this.GetEffects(dot);
-            // var position = dot.transform.position;
             Destroy(dot);
             this.allDots[column, row] = null;
-            // var objEffect = Instantiate(allEffects[effectDot], position, Quaternion.identity);
-            // Destroy(objEffect, 1f);
 
         }
     }
@@ -183,6 +171,7 @@ public class AllDotController : MonoBehaviour
                 if (this.allDots[i, j] != null)
                 {
                     this.DestroyMatchedAt(i, j);
+
                     //this.SpawnDestroyEffects(i, j);
                 }
             }
@@ -264,7 +253,9 @@ public class AllDotController : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         if (IsCheckMached())
         {
+            this.audioManager.audioSrc.PlayOneShot(this.audioManager.SoundContinuousDestruction);
             StartCoroutine(DestroyMatched());
+
         }
         else
         {
