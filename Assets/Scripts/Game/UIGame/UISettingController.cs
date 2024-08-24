@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -41,15 +42,19 @@ public class UISettingController : MonoBehaviour
 
     private void ClickSetting()
     {
-        if (isCheckSetting)
+        StartCoroutine(Delay());
+        // if (isCheckSetting)
+        // {
+
+        //     this.settingBar.SetActive(false);
+
+        //     this.isCheckSetting = false;
+        //     Time.timeScale = 1;
+        //     this.fill.SetActive(false);
+        // }
+        if (!isCheckSetting)
         {
-            this.settingBar.SetActive(false);
-            this.isCheckSetting = false;
-            Time.timeScale = 1;
-            this.fill.SetActive(false);
-        }
-        else
-        {
+            GameStateController.Instance.CurrentGameState = GameState.OpenSetting;
             this.settingBar.SetActive(true);
             this.isCheckSetting = true;
             Time.timeScale = 0;
@@ -65,6 +70,8 @@ public class UISettingController : MonoBehaviour
 
     private void ClickResume()
     {
+        GameStateController.Instance.CurrentGameState = GameState.Swipe;
+        StartCoroutine(Delay());
         this.settingBar.SetActive(false);
         this.isCheckSetting = false;
         Time.timeScale = 1;
@@ -73,6 +80,7 @@ public class UISettingController : MonoBehaviour
 
     private void ClickRestart()
     {
+        StartCoroutine(Delay());
         this.fill.SetActive(false);
         this.settingBar.SetActive(false);
         this.isCheckSetting = false;
@@ -82,5 +90,10 @@ public class UISettingController : MonoBehaviour
         this.inGameItem.LoadDataItem();
         this.inGameItem.UpdateQuantityItem();
         this.save.LoadDataPlayer();
+    }
+    private IEnumerator Delay()
+    {
+        AudioManager.Instance.audioSrc.PlayOneShot(AudioManager.Instance.SoundClick);
+        yield return new WaitForSeconds(0.3f);
     }
 }

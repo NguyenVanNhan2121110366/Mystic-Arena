@@ -13,7 +13,7 @@ public class DotInteraction : MonoBehaviour
     [SerializeField] private int targetX, targetY;
     [SerializeField] private GameObject dotClick;
     [SerializeField] private GameObject obj;
-    private AudioManager audioManager;
+    [SerializeField] private bool isCheckDotCLick;
     private AllDotController alldots;
     #endregion
     #region Public
@@ -23,7 +23,6 @@ public class DotInteraction : MonoBehaviour
 
     private void Awake()
     {
-        this.audioManager = FindFirstObjectByType<AudioManager>();
         this.alldots = FindFirstObjectByType<AllDotController>();
     }
     #endregion
@@ -31,6 +30,7 @@ public class DotInteraction : MonoBehaviour
     void Start()
     {
         isMatched = false;
+        this.isCheckDotCLick = true;
     }
 
     // Update is called once per frame
@@ -40,7 +40,6 @@ public class DotInteraction : MonoBehaviour
         targetY = row;
         this.Find3Matched();
         this.MoveDot();
-
     }
 
 
@@ -117,16 +116,12 @@ public class DotInteraction : MonoBehaviour
             yield return null;
             if (!isMatched && !this.targetDot.GetComponent<DotInteraction>().isMatched)
             {
-                this.audioManager.audioSrc.PlayOneShot(this.audioManager.SoundDestroyFalse);
+                AudioManager.Instance.audioSrc.PlayOneShot(AudioManager.Instance.SoundDestroyFalse);
                 yield return new WaitForSeconds(0.5f);
                 targetDot.GetComponent<DotInteraction>().column = column;
                 targetDot.GetComponent<DotInteraction>().row = row;
                 row = preRow;
                 column = preColumn;
-                // isCheckClick = true;
-                // isCheckTounch = false;
-                // transform.localScale = Vector3.one;
-
                 GameStateController.Instance.CurrentGameState = GameState.Swipe;
             }
             else
@@ -143,7 +138,7 @@ public class DotInteraction : MonoBehaviour
     private IEnumerator DelaySound()
     {
         yield return new WaitForSeconds(0.5f);
-        this.audioManager.audioSrc.PlayOneShot(this.audioManager.SoundDestroy);
+        AudioManager.Instance.audioSrc.PlayOneShot(AudioManager.Instance.SoundDestroy);
     }
     #region Input
     private string CheckTouch()
@@ -225,11 +220,21 @@ public class DotInteraction : MonoBehaviour
         if (TurnController.Instance.CurrentTurn != GameTurn.Player || GameStateController.Instance.CurrentGameState != GameState.Swipe)
             return;
         mouseDown = GetInput();
-        obj = Instantiate(this.dotClick, this.alldots.AllDots[column, row].transform.position, Quaternion.identity);
+        if (this.isCheckDotCLick)
+        {
+            this.isCheckDotCLick = false;
+            obj = Instantiate(this.dotClick, this.alldots.AllDots[column, row].transform.position, Quaternion.identity);
+        }
+
     }
     private void OnMouseExit()
     {
-        Destroy(obj);
+        if (!this.isCheckDotCLick)
+        {
+            this.isCheckDotCLick = true;
+            Destroy(obj);
+        }
+
     }
     private void OnMouseUp()
     {

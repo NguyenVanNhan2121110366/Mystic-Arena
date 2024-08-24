@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 public class ScoreController : MonoBehaviour
 {
@@ -34,6 +35,7 @@ public class ScoreController : MonoBehaviour
             {
                 GameStateController.Instance.CurrentGameState = GameState.Attacking;
                 Player.Instance.IsMoving = true;
+                StartCoroutine(this.DelaySoundPlayer());
             }
         }
         else if (TurnController.Instance.CurrentTurn == GameTurn.Enemy)
@@ -44,10 +46,20 @@ public class ScoreController : MonoBehaviour
             {
                 GameStateController.Instance.CurrentGameState = GameState.Attacking;
                 Enemy.Instance.IsMoving = true;
+                StartCoroutine(this.DelaySoundPlayer());
             }
         }
-
     }
+
+    private IEnumerator DelaySoundPlayer()
+    {
+        yield return new WaitForSeconds(0.5f);
+        if (TurnController.Instance.CurrentTurn == GameTurn.Player)
+            AudioManager.Instance.audioSrc.PlayOneShot(AudioManager.Instance.SoundStab);
+        else
+            AudioManager.Instance.audioSrc.PlayOneShot(AudioManager.Instance.SoundAttack);
+    }
+
 
     public void ResetScore()
     {

@@ -56,4 +56,5 @@ public enum GameState
     FillingDot,
     CheckingDot,
     Finish,
+    OpenSetting,
 }

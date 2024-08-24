@@ -43,8 +43,6 @@ public class ShopSkill : ShopManager
         this.item.Price = 200;
         if (!SaveGame.Instance.saveData.checkBuySkill[0])
         {
-            Debug.Log(goldPlayer);
-            Debug.Log(this.item.Price);
             if (goldPlayer >= item.Price)
             {
                 this.BuySkill(0, true);
@@ -52,12 +50,10 @@ public class ShopSkill : ShopManager
                 this.fillHealBlood.SetActive(SaveGame.Instance.saveData.checkFill[0]);
                 SaveGame.Instance.Save();
             }
-            else
-                Debug.Log("Khong du tien");
 
         }
         else
-            Debug.Log("Bạn đã mua kỹ năng này rồi");
+            AudioManager.Instance.audioSrc.PlayOneShot(AudioManager.Instance.SoundBuyFalse);
     }
 
     private void ClickBuyAbilityHealBlood()
@@ -66,17 +62,17 @@ public class ShopSkill : ShopManager
         if (SaveGame.Instance.saveData.checkBuySkill[0] && !SaveGame.Instance.saveData.checkBuySkill[1])
         {
             this.BuySkill(1, true);
-            this.fillFireball.SetActive(SaveGame.Instance.saveData.checkFill[0]);
+            SaveGame.Instance.saveData.checkFill[1] = false;
+            this.fillFireball.SetActive(SaveGame.Instance.saveData.checkFill[1]);
         }
         else if (!SaveGame.Instance.saveData.checkBuySkill[0])
         {
-            Debug.Log(" Cần phải học kỹ năng FireBall trước");
-            Debug.Log(this.item.Price);
+            AudioManager.Instance.audioSrc.PlayOneShot(AudioManager.Instance.SoundBuyFalse);
         }
 
         else
         {
-            Debug.Log("Bạn đã mua kỹ năng này rồi");
+            AudioManager.Instance.audioSrc.PlayOneShot(AudioManager.Instance.SoundBuyFalse);
         }
     }
 
@@ -89,12 +85,11 @@ public class ShopSkill : ShopManager
         }
         else if (!SaveGame.Instance.saveData.checkBuySkill[1])
         {
-            Debug.Log(" Cần phải học kỹ năng HealBlood trước");
-            Debug.Log(this.item.Price);
+            AudioManager.Instance.audioSrc.PlayOneShot(AudioManager.Instance.SoundBuyFalse);
         }
         else
         {
-            Debug.Log("Bạn đã mua kỹ năng này rồi");
+            AudioManager.Instance.audioSrc.PlayOneShot(AudioManager.Instance.SoundBuyFalse);
         }
     }
 
@@ -102,6 +97,6 @@ public class ShopSkill : ShopManager
     {
         SaveGame.Instance.Load();
         this.fillFireball.SetActive(SaveGame.Instance.saveData.checkFill[0]);
-        this.fillHealBlood.SetActive(SaveGame.Instance.saveData.checkFill[0]);
+        this.fillHealBlood.SetActive(SaveGame.Instance.saveData.checkFill[1]);
     }
 }

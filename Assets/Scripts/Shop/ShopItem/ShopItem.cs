@@ -32,16 +32,19 @@ public class ShopItem : ShopManager
 
     private void ClickBuyBlood()
     {
+        this.item.Price = 20;
         this.BuyItem(0, 0);
     }
 
     private void ClickBuyMana()
     {
+        this.item.Price = 60;
         this.BuyItem(0, 1);
     }
 
     private void ClickBuyShield()
     {
+        this.item.Price = 40;
         this.BuyItem(0, 2);
     }
 }

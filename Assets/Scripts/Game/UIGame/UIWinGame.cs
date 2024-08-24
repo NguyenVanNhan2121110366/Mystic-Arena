@@ -31,6 +31,7 @@ public class UIWinGame : MonoBehaviour
 
     private void ClickHome()
     {
+        StartCoroutine(Delay());
         this.spawnEnemy.CurrentLevel++;
         SaveGame.Instance.saveData.currentLevel[0] = this.spawnEnemy.CurrentLevel;
         SaveGame.Instance.Save();
@@ -38,9 +39,11 @@ public class UIWinGame : MonoBehaviour
         this.save.SaveDataGoldPlayer();
         SceneManager.LoadScene("Menu");
         Time.timeScale = 1;
+        AudioManager.Instance.audioSrc.PlayOneShot(AudioManager.Instance.SoundClick);
     }
     private void ClickNextGame()
     {
+        StartCoroutine(Delay());
         this.spawnEnemy.CurrentLevel++;
         SaveGame.Instance.saveData.currentLevel[0] = this.spawnEnemy.CurrentLevel;
         SaveGame.Instance.Save();
@@ -55,6 +58,7 @@ public class UIWinGame : MonoBehaviour
             Time.timeScale = 1;
             StartCoroutine(DelayDescription());
         }
+        AudioManager.Instance.audioSrc.PlayOneShot(AudioManager.Instance.SoundClick);
     }
 
     private IEnumerator DelayDescription()
@@ -66,6 +70,14 @@ public class UIWinGame : MonoBehaviour
 
     private void ClickBackHome()
     {
+        StartCoroutine(Delay());
         SceneManager.LoadScene("Menu");
+        AudioManager.Instance.audioSrc.PlayOneShot(AudioManager.Instance.SoundClick);
+    }
+
+    private IEnumerator Delay()
+    {
+        AudioManager.Instance.audioSrc.PlayOneShot(AudioManager.Instance.SoundClick);
+        yield return new WaitForSeconds(0.3f);
     }
 }

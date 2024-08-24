@@ -1,4 +1,5 @@
 
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -17,6 +18,7 @@ public class UIMenu : MonoBehaviour
     [SerializeField] private Button bntVolumeOff;
     [SerializeField] private GameObject objVolume;
     [SerializeField] private GameObject objVolumeOff;
+    [SerializeField] private AudioSource audioSource;
 
     private SaveAllData saveAllData;
 
@@ -75,14 +77,18 @@ public class UIMenu : MonoBehaviour
 
     private void ClickVolume()
     {
+        StartCoroutine(Delay());
         this.objVolume.SetActive(false);
         this.objVolumeOff.SetActive(true);
+        this.audioSource.volume = 0f;
     }
 
     private void ClickVolumeOff()
     {
+        StartCoroutine(Delay());
         this.objVolume.SetActive(true);
         this.objVolumeOff.SetActive(false);
+        this.audioSource.volume = 0.1f;
     }
 
     private void SaveValueIsCheck(int value, bool nameCheck)
@@ -93,6 +99,7 @@ public class UIMenu : MonoBehaviour
 
     private void ClickShop()
     {
+        StartCoroutine(Delay());
         if (checkChooseShop)
         {
             this.chooseShop.SetActive(false);
@@ -108,15 +115,24 @@ public class UIMenu : MonoBehaviour
     }
     private void ClickShopItem()
     {
+        StartCoroutine(Delay());
         SceneManager.LoadScene("ShopItem");
     }
 
     private void ClickShopSkill()
     {
+        StartCoroutine(Delay());
         SceneManager.LoadScene("ShopSkill");
     }
     private void ClickExit()
     {
+        StartCoroutine(Delay());
         Application.Quit();
+    }
+
+    private IEnumerator Delay()
+    {
+        AudioManager.Instance.audioSrc.PlayOneShot(AudioManager.Instance.SoundClick);
+        yield return new WaitForSeconds(0.3f);
     }
 }

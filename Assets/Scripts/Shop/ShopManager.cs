@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
+using System.Collections;
 public class ShopManager : MonoBehaviour
 {
     protected int goldPlayer;
@@ -24,12 +25,14 @@ public class ShopManager : MonoBehaviour
 
     protected virtual void CheckClick()
     {
+        StartCoroutine(Delay());
         SceneManager.LoadScene("Menu");
     }
     protected virtual void BuyItem(int index, int itemIndex)
     {
         if (goldPlayer >= this.item.Price)
         {
+            AudioManager.Instance.audioSrc.PlayOneShot(AudioManager.Instance.SoundBuyItem);
             this.goldPlayer -= this.item.Price;
             this.SaveGoldBuyPlayer();
             this.LoadGold();
@@ -39,7 +42,7 @@ public class ShopManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Khong du tien");
+            AudioManager.Instance.audioSrc.PlayOneShot(AudioManager.Instance.SoundBuyFalse);
         }
     }
 
@@ -49,6 +52,7 @@ public class ShopManager : MonoBehaviour
         // Debug.Log(this.item.Price);
         if (goldPlayer >= this.item.Price)
         {
+            AudioManager.Instance.audioSrc.PlayOneShot(AudioManager.Instance.SoundBuyItem);
             this.goldPlayer -= this.item.Price;
             this.SaveGoldBuyPlayer();
             this.LoadGold();
@@ -58,7 +62,7 @@ public class ShopManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Khong du tien");
+            AudioManager.Instance.audioSrc.PlayOneShot(AudioManager.Instance.SoundBuyFalse);
         }
     }
 
@@ -74,5 +78,11 @@ public class ShopManager : MonoBehaviour
     {
         SaveGame.Instance.Load();
         this.goldPlayer = SaveGame.Instance.saveData.goldPlayer[1];
+    }
+
+    private IEnumerator Delay()
+    {
+        AudioManager.Instance.audioSrc.PlayOneShot(AudioManager.Instance.SoundClick);
+        yield return new WaitForSeconds(0.3f);
     }
 }

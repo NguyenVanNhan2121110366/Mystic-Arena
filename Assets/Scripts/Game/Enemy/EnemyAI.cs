@@ -8,11 +8,9 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private string[,] allTags;
     [SerializeField] private bool isTurnEnemy;
     [SerializeField] private List<MoveDot> allMoves;
-    private AudioManager audioManager;
 
     private void Awake()
     {
-        this.audioManager = FindFirstObjectByType<AudioManager>();
         this.allDot = FindFirstObjectByType<AllDotController>();
         this.allTags = new string[this.allDot.Width, this.allDot.Height];
         this.allMoves = new List<MoveDot>();
@@ -54,7 +52,7 @@ public class EnemyAI : MonoBehaviour
         GameStateController.Instance.CurrentGameState = GameState.FillingDot;
         StartCoroutine(this.allDot.DestroyMatched());
         yield return new WaitForSeconds(0.5f);
-        this.audioManager.audioSrc.PlayOneShot(this.audioManager.SoundDestroy);
+        AudioManager.Instance.audioSrc.PlayOneShot(AudioManager.Instance.SoundDestroy);
     }
 
     private void GetAllTag()

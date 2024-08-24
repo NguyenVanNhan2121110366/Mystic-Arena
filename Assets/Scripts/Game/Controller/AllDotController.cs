@@ -13,7 +13,6 @@ public class AllDotController : MonoBehaviour
     private GameObject[,] allGrids;
     private GameObject[,] allDots;
     private ScoreController scoreController;
-    private AudioManager audioManager;
     #endregion
     #region Public
     public int Width { get => width; set => width = value; }
@@ -25,7 +24,6 @@ public class AllDotController : MonoBehaviour
     private void Awake()
     {
         this.scoreController = FindFirstObjectByType<ScoreController>();
-        this.audioManager = FindAnyObjectByType<AudioManager>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -253,7 +251,7 @@ public class AllDotController : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         if (IsCheckMached())
         {
-            this.audioManager.audioSrc.PlayOneShot(this.audioManager.SoundContinuousDestruction);
+            AudioManager.Instance.audioSrc.PlayOneShot(AudioManager.Instance.SoundContinuousDestruction);
             StartCoroutine(DestroyMatched());
 
         }

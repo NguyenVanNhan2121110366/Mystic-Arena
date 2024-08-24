@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Description : MonoBehaviour
@@ -11,6 +12,7 @@ public class Description : MonoBehaviour
 
     private void OnMouseEnter()
     {
+        StartCoroutine(Delay());
         this.objDescription.SetActive(true);
         Debug.Log("Check");
     }
@@ -19,5 +21,11 @@ public class Description : MonoBehaviour
     {
         this.objDescription.SetActive(false);
         Debug.Log("Check 2");
+    }
+
+    private IEnumerator Delay()
+    {
+        AudioManager.Instance.audioSrc.PlayOneShot(AudioManager.Instance.SoundClick);
+        yield return new WaitForSeconds(0.3f);
     }
 }
