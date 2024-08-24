@@ -1,15 +1,15 @@
 using UnityEngine;
 
-public class AudioManager : MonoBehaviour
+public class SoundManager : MonoBehaviour
 {
-    private static AudioManager instance;
-    public static AudioManager Instance
+    private static SoundManager instance;
+    public static SoundManager Instance
     {
         get
         {
             if (instance == null)
             {
-                instance = FindFirstObjectByType<AudioManager>();
+                instance = FindFirstObjectByType<SoundManager>();
             }
             return instance;
         }
@@ -37,10 +37,9 @@ public class AudioManager : MonoBehaviour
     public AudioClip SoundStab { get => soundStab; set => soundStab = value; }
     #endregion
 
-    
+
     void Start()
     {
         this.audioSrc = GetComponent<AudioSource>();
     }
-
 }

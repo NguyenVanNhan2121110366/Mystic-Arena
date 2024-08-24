@@ -1118,7 +1118,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 5ce6c5fa5b079c6428b7e9be18f9c237, type: 3}
   m_Resource: {fileID: 8300000, guid: 5ce6c5fa5b079c6428b7e9be18f9c237, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1483,7 +1483,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 774149494}
   m_CullTransparentMesh: 1
---- !u!1 &953363473
+--- !u!1 &1015393463
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1491,9 +1491,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 953363476}
-  - component: {fileID: 953363475}
-  - component: {fileID: 953363474}
+  - component: {fileID: 1015393467}
+  - component: {fileID: 1015393466}
+  - component: {fileID: 1015393465}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -1501,13 +1501,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!82 &953363474
+--- !u!82 &1015393465
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 953363473}
+  m_GameObject: {fileID: 1015393463}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
@@ -1598,16 +1598,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &953363475
+--- !u!114 &1015393466
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 953363473}
+  m_GameObject: {fileID: 1015393463}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59ce1b15b78fedf449a899414c64dfe1, type: 3}
+  m_Script: {fileID: 11500000, guid: b84ca5a546a4b5a4bbe788715d05b0e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   audioSrc: {fileID: 0}
@@ -1619,16 +1619,16 @@ MonoBehaviour:
   soundBuyItem: {fileID: 8300000, guid: f51f44e9baa4a1c41b371d7ed3280002, type: 3}
   soundAttack: {fileID: 8300000, guid: 1d7bfd032bc13b64985fd349123c948e, type: 3}
   soundStab: {fileID: 8300000, guid: 10c9eb08ac40d9c47b013cb1604f5e18, type: 3}
---- !u!4 &953363476
+--- !u!4 &1015393467
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 953363473}
+  m_GameObject: {fileID: 1015393463}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.6941772, y: 5.365128, z: 2923.7092}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2445,6 +2445,11 @@ MonoBehaviour:
     checkBuySkill: 0000000000
     checkFill: 0101010101
     currentLevel: 0000000000000000000000000000000000000000
+    saveSound:
+    - 0.3
+    - 0
+    - 0
+    isCheckSound: 0100
 --- !u!114 &1954456292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2457,6 +2462,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a95f8ac7b52fce4886987e866fdf6ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioSource: {fileID: 519420033}
 --- !u!4 &1954456293
 Transform:
   m_ObjectHideFlags: 0
@@ -2509,7 +2515,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1042.48, y: 5.63}
+  m_AnchoredPosition: {x: 1030.7, y: 5.63}
   m_SizeDelta: {x: 200, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1959219518
@@ -2725,4 +2731,4 @@ SceneRoots:
   - {fileID: 1878731878}
   - {fileID: 32728997}
   - {fileID: 1954456293}
-  - {fileID: 953363476}
+  - {fileID: 1015393467}

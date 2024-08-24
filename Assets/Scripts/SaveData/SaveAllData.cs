@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class SaveAllData : MonoBehaviour
 {
+    public AudioSource audioSource;
     public void SaveDataGoldPlayer()
     {
         if (Player.Instance != null)

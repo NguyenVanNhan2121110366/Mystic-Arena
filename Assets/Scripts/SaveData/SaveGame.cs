@@ -15,6 +15,8 @@ public class SaveData
     public bool[] checkBuySkill = new bool[5];
     public bool[] checkFill = new bool[] { true, true, true, true, true };
     public int[] currentLevel = new int[5];
+    public float[] saveSound = new float[] { 0.3f, 0, 0 };
+    public bool[] isCheckSound = new bool[] { true, false };
 }
 
 public class SaveGame : MonoBehaviour

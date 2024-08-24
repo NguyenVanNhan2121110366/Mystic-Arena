@@ -13,7 +13,7 @@ public class DotInteraction : MonoBehaviour
     [SerializeField] private int targetX, targetY;
     [SerializeField] private GameObject dotClick;
     [SerializeField] private GameObject obj;
-    [SerializeField] private bool isCheckDotCLick;
+    private bool isCheckDotCLick;
     private AllDotController alldots;
     #endregion
     #region Public
@@ -116,7 +116,7 @@ public class DotInteraction : MonoBehaviour
             yield return null;
             if (!isMatched && !this.targetDot.GetComponent<DotInteraction>().isMatched)
             {
-                AudioManager.Instance.audioSrc.PlayOneShot(AudioManager.Instance.SoundDestroyFalse);
+                SoundManager.Instance.audioSrc.PlayOneShot(SoundManager.Instance.SoundDestroyFalse);
                 yield return new WaitForSeconds(0.5f);
                 targetDot.GetComponent<DotInteraction>().column = column;
                 targetDot.GetComponent<DotInteraction>().row = row;
@@ -128,17 +128,16 @@ public class DotInteraction : MonoBehaviour
             {
                 GameStateController.Instance.CurrentGameState = GameState.FillingDot;
                 StartCoroutine(this.alldots.DestroyMatched());
-                StartCoroutine(this.DelaySound());
+                StartCoroutine(DelayDestroy());
             }
             targetDot = null;
 
         }
     }
-
-    private IEnumerator DelaySound()
+    private IEnumerator DelayDestroy()
     {
         yield return new WaitForSeconds(0.5f);
-        AudioManager.Instance.audioSrc.PlayOneShot(AudioManager.Instance.SoundDestroy);
+        SoundManager.Instance.audioSrc.PlayOneShot(SoundManager.Instance.SoundDestroy);
     }
     #region Input
     private string CheckTouch()
@@ -163,48 +162,39 @@ public class DotInteraction : MonoBehaviour
     {
         if (inputDirection == "right" && column + 1 < this.alldots.Width)
         {
-
             targetDot = this.alldots.AllDots[column + 1, row];
             targetDot.GetComponent<DotInteraction>().column -= 1;
             this.SetValue();
             column += 1;
             GameStateController.Instance.CurrentGameState = GameState.CheckingDot;
             Debug.Log("right");
-
-
         }
         if (inputDirection == "left" && column - 1 >= 0)
         {
-
             targetDot = this.alldots.AllDots[column - 1, row];
             targetDot.GetComponent<DotInteraction>().column += 1;
             this.SetValue();
             column -= 1;
             GameStateController.Instance.CurrentGameState = GameState.CheckingDot;
             Debug.Log("left");
-
         }
         if (inputDirection == "up" && row + 1 < this.alldots.Height)
         {
-
             targetDot = this.alldots.AllDots[column, row + 1];
             targetDot.GetComponent<DotInteraction>().row -= 1;
             this.SetValue();
             row += 1;
             GameStateController.Instance.CurrentGameState = GameState.CheckingDot;
             Debug.Log("up");
-
         }
         if (inputDirection == "down" && row - 1 >= 0)
         {
-
             targetDot = this.alldots.AllDots[column, row - 1];
             targetDot.GetComponent<DotInteraction>().row += 1;
             this.SetValue();
             row -= 1;
             GameStateController.Instance.CurrentGameState = GameState.CheckingDot;
             Debug.Log("down");
-
         }
         StartCoroutine(ChecktargetDot());
     }
@@ -225,8 +215,8 @@ public class DotInteraction : MonoBehaviour
             this.isCheckDotCLick = false;
             obj = Instantiate(this.dotClick, this.alldots.AllDots[column, row].transform.position, Quaternion.identity);
         }
-
     }
+
     private void OnMouseExit()
     {
         if (!this.isCheckDotCLick)
@@ -234,7 +224,6 @@ public class DotInteraction : MonoBehaviour
             this.isCheckDotCLick = true;
             Destroy(obj);
         }
-
     }
     private void OnMouseUp()
     {
@@ -244,8 +233,6 @@ public class DotInteraction : MonoBehaviour
         var inputDirection = CheckTouch();
         this.GetValueInput(inputDirection);
     }
-
-
     #endregion
 
     private void SetValue()

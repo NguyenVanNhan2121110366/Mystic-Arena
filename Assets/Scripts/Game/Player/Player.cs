@@ -55,11 +55,6 @@ public class Player : Character
         this.rotationPlayer = transform.rotation;
         this.posPlayer = transform.position;
         this.CurrentGold = 0;
-        // if (SaveGame.Instance.saveData.isCheck[0])
-        // {
-        //     SaveGame.Instance.saveData.isCheck[0] = false;
-        //     SaveGame.Instance.Save();
-        // }
         if (SaveGame.Instance.saveData.isCheck[1])
         {
             this.saveAllData.LoadDataPlayer();
@@ -160,12 +155,7 @@ public class Player : Character
                     if (remainingdame > 0)
                     {
                         this.CurrentScoreHeal -= remainingdame;
-                        if (CurrentScoreHeal <= 0)
-                        {
-
-                        }
                     }
-
                 }
                 else
                 {

@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -42,19 +41,9 @@ public class UISettingController : MonoBehaviour
 
     private void ClickSetting()
     {
-        StartCoroutine(Delay());
-        // if (isCheckSetting)
-        // {
-
-        //     this.settingBar.SetActive(false);
-
-        //     this.isCheckSetting = false;
-        //     Time.timeScale = 1;
-        //     this.fill.SetActive(false);
-        // }
+        SoundManager.Instance.audioSrc.PlayOneShot(SoundManager.Instance.SoundClick);
         if (!isCheckSetting)
         {
-            GameStateController.Instance.CurrentGameState = GameState.OpenSetting;
             this.settingBar.SetActive(true);
             this.isCheckSetting = true;
             Time.timeScale = 0;
@@ -70,8 +59,7 @@ public class UISettingController : MonoBehaviour
 
     private void ClickResume()
     {
-        GameStateController.Instance.CurrentGameState = GameState.Swipe;
-        StartCoroutine(Delay());
+        SoundManager.Instance.audioSrc.PlayOneShot(SoundManager.Instance.SoundClick);
         this.settingBar.SetActive(false);
         this.isCheckSetting = false;
         Time.timeScale = 1;
@@ -80,20 +68,13 @@ public class UISettingController : MonoBehaviour
 
     private void ClickRestart()
     {
-        StartCoroutine(Delay());
+        SoundManager.Instance.audioSrc.PlayOneShot(SoundManager.Instance.SoundClick);
         this.fill.SetActive(false);
         this.settingBar.SetActive(false);
         this.isCheckSetting = false;
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Time.timeScale = 1;
-        //this.save.SaveDataPlayer();
         this.inGameItem.LoadDataItem();
         this.inGameItem.UpdateQuantityItem();
         this.save.LoadDataPlayer();
-    }
-    private IEnumerator Delay()
-    {
-        AudioManager.Instance.audioSrc.PlayOneShot(AudioManager.Instance.SoundClick);
-        yield return new WaitForSeconds(0.3f);
     }
 }

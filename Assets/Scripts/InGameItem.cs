@@ -37,9 +37,9 @@ public class InGameItem : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        this.healBlood = 200;
-        this.healMana = 200;
-        this.healShield = 150;
+        this.healBlood = 100;
+        this.healMana = 50;
+        this.healShield = 50;
         this.UpdateQuantityItem();
 
     }

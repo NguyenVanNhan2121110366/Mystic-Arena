@@ -3,13 +3,13 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
-using System.Collections;
 public class ShopManager : MonoBehaviour
 {
     protected int goldPlayer;
     protected TextMeshProUGUI txtGold;
     protected Button bntTest;
     protected Item item;
+    public SaveAllData saveAllData;
     public int GoldPlayer { get => goldPlayer; set => goldPlayer = value; }
 
     void Start()
@@ -25,14 +25,13 @@ public class ShopManager : MonoBehaviour
 
     protected virtual void CheckClick()
     {
-        StartCoroutine(Delay());
         SceneManager.LoadScene("Menu");
     }
     protected virtual void BuyItem(int index, int itemIndex)
     {
         if (goldPlayer >= this.item.Price)
         {
-            AudioManager.Instance.audioSrc.PlayOneShot(AudioManager.Instance.SoundBuyItem);
+            SoundManager.Instance.audioSrc.PlayOneShot(SoundManager.Instance.SoundBuyItem);
             this.goldPlayer -= this.item.Price;
             this.SaveGoldBuyPlayer();
             this.LoadGold();
@@ -42,17 +41,15 @@ public class ShopManager : MonoBehaviour
         }
         else
         {
-            AudioManager.Instance.audioSrc.PlayOneShot(AudioManager.Instance.SoundBuyFalse);
+            SoundManager.Instance.audioSrc.PlayOneShot(SoundManager.Instance.SoundBuyFalse);
         }
     }
 
     protected virtual void BuySkill(int index, bool isCheck)
     {
-        // Debug.Log(goldPlayer);
-        // Debug.Log(this.item.Price);
         if (goldPlayer >= this.item.Price)
         {
-            AudioManager.Instance.audioSrc.PlayOneShot(AudioManager.Instance.SoundBuyItem);
+            SoundManager.Instance.audioSrc.PlayOneShot(SoundManager.Instance.SoundBuyItem);
             this.goldPlayer -= this.item.Price;
             this.SaveGoldBuyPlayer();
             this.LoadGold();
@@ -62,7 +59,7 @@ public class ShopManager : MonoBehaviour
         }
         else
         {
-            AudioManager.Instance.audioSrc.PlayOneShot(AudioManager.Instance.SoundBuyFalse);
+            SoundManager.Instance.audioSrc.PlayOneShot(SoundManager.Instance.SoundBuyFalse);
         }
     }
 
@@ -78,11 +75,5 @@ public class ShopManager : MonoBehaviour
     {
         SaveGame.Instance.Load();
         this.goldPlayer = SaveGame.Instance.saveData.goldPlayer[1];
-    }
-
-    private IEnumerator Delay()
-    {
-        AudioManager.Instance.audioSrc.PlayOneShot(AudioManager.Instance.SoundClick);
-        yield return new WaitForSeconds(0.3f);
     }
 }

@@ -44,15 +44,15 @@ public class EnemyAI : MonoBehaviour
         var targetDot = this.allDot.AllDots[moveDot.TargetDotCol, moveDot.TargetDotRow];
         originDot.GetComponent<DotInteraction>().SetDot(moveDot.TargetDotCol, moveDot.TargetDotRow);
         targetDot.GetComponent<DotInteraction>().SetDot(moveDot.OriginDotCol, moveDot.OriginDotRow);
-        StartCoroutine(this.DestroyMatchedEnemy());
+        StartCoroutine(this.DelayDestroyEnemy());
     }
 
-    private IEnumerator DestroyMatchedEnemy()
+    private IEnumerator DelayDestroyEnemy()
     {
         GameStateController.Instance.CurrentGameState = GameState.FillingDot;
         StartCoroutine(this.allDot.DestroyMatched());
         yield return new WaitForSeconds(0.5f);
-        AudioManager.Instance.audioSrc.PlayOneShot(AudioManager.Instance.SoundDestroy);
+        SoundManager.Instance.audioSrc.PlayOneShot(SoundManager.Instance.SoundDestroy);
     }
 
     private void GetAllTag()

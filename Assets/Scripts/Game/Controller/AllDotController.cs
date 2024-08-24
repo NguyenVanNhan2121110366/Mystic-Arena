@@ -9,10 +9,10 @@ public class AllDotController : MonoBehaviour
     [SerializeField] private Transform parentObj;
     [SerializeField] private GameObject girdPrefab;
     [SerializeField] private GameObject[] allEffects;
-    [SerializeField] private GameObject currentDot;
     private GameObject[,] allGrids;
     private GameObject[,] allDots;
     private ScoreController scoreController;
+    private SaveAllData saveAllData;
     #endregion
     #region Public
     public int Width { get => width; set => width = value; }
@@ -23,6 +23,7 @@ public class AllDotController : MonoBehaviour
 
     private void Awake()
     {
+        this.saveAllData = FindFirstObjectByType<SaveAllData>();
         this.scoreController = FindFirstObjectByType<ScoreController>();
     }
 
@@ -34,7 +35,7 @@ public class AllDotController : MonoBehaviour
         this.allGrids = new GameObject[this.width, this.height];
         this.GetAllDotToArray();
         StartCoroutine(this.CreateDotAndGrid());
-
+        this.saveAllData.audioSource.volume = SaveGame.Instance.saveData.saveSound[0];
     }
 
     private void GetAllDotToArray()
@@ -44,6 +45,14 @@ public class AllDotController : MonoBehaviour
             this.dots[i] = this.parentObj.GetChild(i).gameObject;
         }
     }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+
 
     private IEnumerator CreateDotAndGrid()
     {
@@ -152,8 +161,12 @@ public class AllDotController : MonoBehaviour
         if (this.allDots[column, row].GetComponent<DotInteraction>().IsMatched)
         {
             this.SpawnDestroyEffects(column, row);
+            // var effectDot = this.GetEffects(dot);
+            // var position = dot.transform.position;
             Destroy(dot);
             this.allDots[column, row] = null;
+            // var objEffect = Instantiate(allEffects[effectDot], position, Quaternion.identity);
+            // Destroy(objEffect, 1f);
 
         }
     }
@@ -169,7 +182,6 @@ public class AllDotController : MonoBehaviour
                 if (this.allDots[i, j] != null)
                 {
                     this.DestroyMatchedAt(i, j);
-
                     //this.SpawnDestroyEffects(i, j);
                 }
             }
@@ -251,9 +263,8 @@ public class AllDotController : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         if (IsCheckMached())
         {
-            AudioManager.Instance.audioSrc.PlayOneShot(AudioManager.Instance.SoundContinuousDestruction);
+            SoundManager.Instance.audioSrc.PlayOneShot(SoundManager.Instance.SoundContinuousDestruction);
             StartCoroutine(DestroyMatched());
-
         }
         else
         {
@@ -265,7 +276,6 @@ public class AllDotController : MonoBehaviour
             if (GameStateController.Instance.CurrentGameState == GameState.FillingDot)
             {
                 this.scoreController.UpdateScore();
-                // Player.Instance.PlusScoreGold();
                 yield return new WaitForSeconds(0.5f);
                 if (GameStateController.Instance.CurrentGameState == GameState.FillingDot)
                 {

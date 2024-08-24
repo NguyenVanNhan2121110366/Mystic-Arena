@@ -55,11 +55,10 @@ public class ScoreController : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         if (TurnController.Instance.CurrentTurn == GameTurn.Player)
-            AudioManager.Instance.audioSrc.PlayOneShot(AudioManager.Instance.SoundStab);
+            SoundManager.Instance.audioSrc.PlayOneShot(SoundManager.Instance.SoundStab);
         else
-            AudioManager.Instance.audioSrc.PlayOneShot(AudioManager.Instance.SoundAttack);
+            SoundManager.Instance.audioSrc.PlayOneShot(SoundManager.Instance.SoundAttack);
     }
-
 
     public void ResetScore()
     {

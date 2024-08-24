@@ -11,6 +11,7 @@ public class ShopItem : ShopManager
 
     private void Awake()
     {
+        this.saveAllData = FindFirstObjectByType<SaveAllData>();
         this.item = FindFirstObjectByType<Item>();
         this.bntBuyBlood = GameObject.Find("ButtonBlood").GetComponent<Button>();
         this.bntBuyMana = GameObject.Find("ButtonMana").GetComponent<Button>();
@@ -28,6 +29,7 @@ public class ShopItem : ShopManager
     void Start()
     {
         this.LoadGold();
+        this.saveAllData.audioSource.volume = SaveGame.Instance.saveData.saveSound[0];
     }
 
     private void ClickBuyBlood()

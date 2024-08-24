@@ -13,6 +13,7 @@ public class ShopSkill : ShopManager
 
     private void Awake()
     {
+        this.saveAllData = FindFirstObjectByType<SaveAllData>();
         this.item = FindFirstObjectByType<Item>();
         this.txtGold = GameObject.Find("txtGold").GetComponent<TextMeshProUGUI>();
         this.bntBuyAbilityFireBall = GameObject.Find("ButtonFireBall").GetComponent<Button>();
@@ -30,6 +31,7 @@ public class ShopSkill : ShopManager
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        this.saveAllData.audioSource.volume = SaveGame.Instance.saveData.saveSound[0];
         this.LoadGold();
     }
 
@@ -50,10 +52,9 @@ public class ShopSkill : ShopManager
                 this.fillHealBlood.SetActive(SaveGame.Instance.saveData.checkFill[0]);
                 SaveGame.Instance.Save();
             }
-
         }
         else
-            AudioManager.Instance.audioSrc.PlayOneShot(AudioManager.Instance.SoundBuyFalse);
+            SoundManager.Instance.audioSrc.PlayOneShot(SoundManager.Instance.SoundBuyFalse);
     }
 
     private void ClickBuyAbilityHealBlood()
@@ -67,12 +68,12 @@ public class ShopSkill : ShopManager
         }
         else if (!SaveGame.Instance.saveData.checkBuySkill[0])
         {
-            AudioManager.Instance.audioSrc.PlayOneShot(AudioManager.Instance.SoundBuyFalse);
+            SoundManager.Instance.audioSrc.PlayOneShot(SoundManager.Instance.SoundBuyFalse);
         }
 
         else
         {
-            AudioManager.Instance.audioSrc.PlayOneShot(AudioManager.Instance.SoundBuyFalse);
+            SoundManager.Instance.audioSrc.PlayOneShot(SoundManager.Instance.SoundBuyFalse);
         }
     }
 
@@ -85,11 +86,11 @@ public class ShopSkill : ShopManager
         }
         else if (!SaveGame.Instance.saveData.checkBuySkill[1])
         {
-            AudioManager.Instance.audioSrc.PlayOneShot(AudioManager.Instance.SoundBuyFalse);
+            SoundManager.Instance.audioSrc.PlayOneShot(SoundManager.Instance.SoundBuyFalse);
         }
         else
         {
-            AudioManager.Instance.audioSrc.PlayOneShot(AudioManager.Instance.SoundBuyFalse);
+            SoundManager.Instance.audioSrc.PlayOneShot(SoundManager.Instance.SoundBuyFalse);
         }
     }
 
@@ -97,6 +98,6 @@ public class ShopSkill : ShopManager
     {
         SaveGame.Instance.Load();
         this.fillFireball.SetActive(SaveGame.Instance.saveData.checkFill[0]);
-        this.fillHealBlood.SetActive(SaveGame.Instance.saveData.checkFill[1]);
+        this.fillHealBlood.SetActive(SaveGame.Instance.saveData.checkFill[0]);
     }
 }

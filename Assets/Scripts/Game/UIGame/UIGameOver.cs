@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -25,7 +24,6 @@ public class UIGameOver : MonoBehaviour
 
     private void ClickHome()
     {
-        StartCoroutine(Delay());
         this.save.SaveDataGoldPlayer();
         Time.timeScale = 1;
         SceneManager.LoadScene("Menu");
@@ -33,7 +31,7 @@ public class UIGameOver : MonoBehaviour
 
     private void ClickRestart()
     {
-        StartCoroutine(Delay());
+        SoundManager.Instance.audioSrc.PlayOneShot(SoundManager.Instance.SoundClick);
         if (SaveGame.Instance.saveData.scoreBlood[1] > 0)
         {
             this.fillGameOver.SetActive(false);
@@ -47,11 +45,5 @@ public class UIGameOver : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
-    }
-
-    private IEnumerator Delay()
-    {
-        AudioManager.Instance.audioSrc.PlayOneShot(AudioManager.Instance.SoundClick);
-        yield return new WaitForSeconds(0.3f);
     }
 }

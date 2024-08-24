@@ -1,5 +1,4 @@
 
-using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -26,6 +25,7 @@ public class UIMenu : MonoBehaviour
 
     private void Awake()
     {
+        this.saveAllData = FindFirstObjectByType<SaveAllData>();
         this.objVolume = GameObject.Find("Volume");
         this.objVolumeOff = GameObject.Find("VolumeOff");
         this.saveAllData = FindFirstObjectByType<SaveAllData>();
@@ -48,18 +48,20 @@ public class UIMenu : MonoBehaviour
     }
     private void Start()
     {
+        SaveGame.Instance.Load();
+        this.objVolume.SetActive(SaveGame.Instance.saveData.isCheckSound[0]);
+        this.objVolumeOff.SetActive(SaveGame.Instance.saveData.isCheckSound[1]);
+        this.saveAllData.audioSource.volume = SaveGame.Instance.saveData.saveSound[0];
         this.checkChooseShop = false;
         this.chooseShop.SetActive(false);
         this.checkContinue = false;
         this.checkNewGame = false;
-        this.objVolumeOff.SetActive(false);
+        //this.objVolumeOff.SetActive(false);
     }
     private void ClickStart()
     {
         SceneManager.LoadScene("Game");
         this.saveAllData.ResetData();
-        //this.checkNewGame = true;
-        //this.SaveValueIsCheck(0, checkNewGame);
     }
 
     private void ClickContinue()
@@ -77,18 +79,26 @@ public class UIMenu : MonoBehaviour
 
     private void ClickVolume()
     {
-        StartCoroutine(Delay());
+        SoundManager.Instance.audioSrc.PlayOneShot(SoundManager.Instance.SoundClick);
         this.objVolume.SetActive(false);
         this.objVolumeOff.SetActive(true);
-        this.audioSource.volume = 0f;
+        this.saveAllData.audioSource.volume = 0;
+        SaveGame.Instance.saveData.saveSound[0] = 0;
+        SaveGame.Instance.saveData.isCheckSound[0] = false;
+        SaveGame.Instance.saveData.isCheckSound[1] = true;
+        SaveGame.Instance.Save();
     }
 
     private void ClickVolumeOff()
     {
-        StartCoroutine(Delay());
+        SoundManager.Instance.audioSrc.PlayOneShot(SoundManager.Instance.SoundClick);
         this.objVolume.SetActive(true);
         this.objVolumeOff.SetActive(false);
-        this.audioSource.volume = 0.1f;
+        this.saveAllData.audioSource.volume = 0.3f;
+        SaveGame.Instance.saveData.saveSound[0] = 0.3f;
+        SaveGame.Instance.saveData.isCheckSound[0] = true;
+        SaveGame.Instance.saveData.isCheckSound[1] = false;
+        SaveGame.Instance.Save();
     }
 
     private void SaveValueIsCheck(int value, bool nameCheck)
@@ -99,7 +109,7 @@ public class UIMenu : MonoBehaviour
 
     private void ClickShop()
     {
-        StartCoroutine(Delay());
+        SoundManager.Instance.audioSrc.PlayOneShot(SoundManager.Instance.SoundClick);
         if (checkChooseShop)
         {
             this.chooseShop.SetActive(false);
@@ -115,24 +125,15 @@ public class UIMenu : MonoBehaviour
     }
     private void ClickShopItem()
     {
-        StartCoroutine(Delay());
         SceneManager.LoadScene("ShopItem");
     }
 
     private void ClickShopSkill()
     {
-        StartCoroutine(Delay());
         SceneManager.LoadScene("ShopSkill");
     }
     private void ClickExit()
     {
-        StartCoroutine(Delay());
         Application.Quit();
-    }
-
-    private IEnumerator Delay()
-    {
-        AudioManager.Instance.audioSrc.PlayOneShot(AudioManager.Instance.SoundClick);
-        yield return new WaitForSeconds(0.3f);
     }
 }

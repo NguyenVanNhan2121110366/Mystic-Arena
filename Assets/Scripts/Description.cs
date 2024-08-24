@@ -14,18 +14,16 @@ public class Description : MonoBehaviour
     {
         StartCoroutine(Delay());
         this.objDescription.SetActive(true);
-        Debug.Log("Check");
     }
 
     private void OnMouseExit()
     {
         this.objDescription.SetActive(false);
-        Debug.Log("Check 2");
     }
 
     private IEnumerator Delay()
     {
-        AudioManager.Instance.audioSrc.PlayOneShot(AudioManager.Instance.SoundClick);
+        SoundManager.Instance.audioSrc.PlayOneShot(SoundManager.Instance.SoundClick);
         yield return new WaitForSeconds(0.3f);
     }
 }
