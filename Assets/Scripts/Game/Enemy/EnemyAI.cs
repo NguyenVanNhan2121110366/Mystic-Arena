@@ -37,7 +37,8 @@ public class EnemyAI : MonoBehaviour
 
     private IEnumerator RandomMoveDot()
     {
-        yield return new WaitForSeconds(.5f);
+        var randomNumber = Random.Range(0, 6f);
+        yield return new WaitForSeconds(randomNumber);
         var randomIndex = Random.Range(0, this.allMoves.Count);
         var moveDot = this.allMoves[randomIndex];
         var originDot = this.allDot.AllDots[moveDot.OriginDotCol, moveDot.OriginDotRow];

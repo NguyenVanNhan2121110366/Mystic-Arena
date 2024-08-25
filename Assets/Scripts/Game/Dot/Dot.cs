@@ -82,10 +82,10 @@ public class Dot : MonoBehaviour
                  row + j >= 0 && row + j < this.alldots.Height &&
                  this.alldots.AllDots[column + i, row + j] != null)
                 {
+                    this.alldots.SpawnDestroyEffects(column + i, row + j);
                     Destroy(this.alldots.AllDots[column + i, row + j]);
                     this.alldots.AllDots[column + i, row + j] = null;
                 }
-
             }
         }
     }
