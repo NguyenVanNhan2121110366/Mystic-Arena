@@ -23,7 +23,9 @@ public class TurnController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI txtTurn;
     [SerializeField] private GameObject bgrTextTurn;
     [SerializeField] private int seconds;
-    [SerializeField]
+    [SerializeField] private GameObject backGroundSeconds;
+    [SerializeField] private TextMeshProUGUI txtSeconds;
+
     private bool isCheck;
     public GameTurn CurrentTurn { get => currentTurn; set => currentTurn = value; }
 
@@ -85,10 +87,7 @@ public class TurnController : MonoBehaviour
 
     }
 
-    private void MinusSeconds(int second)
-    {
-        this.seconds -= second;
-    }
+    private void MinusSeconds(int second) { this.seconds -= second; }
 
     public IEnumerator CheckTurnAndSwitch()
     {
@@ -112,8 +111,7 @@ public class TurnController : MonoBehaviour
     private void SetNewTurn()
     {
         this.enemyAI = FindFirstObjectByType<EnemyAI>();
-        if (this.enemyAI != null)
-            FindFirstObjectByType<EnemyAI>().AutoTurn();
+        if (this.enemyAI != null) FindFirstObjectByType<EnemyAI>().AutoTurn();
     }
 
     private void SwitchTurn()
