@@ -34,6 +34,15 @@ public class Dot : MonoBehaviour
         this.UpdateScore();
     }
 
+    public void DestroyEffects()
+    {
+        if (dotName.Contains("Big") && dotName != null)
+        {
+            Debug.Log("Destroy Big");
+            this.DestroyBig();
+        }
+    }
+
     private void UpdateScore()
     {
         if (dotTag == "Blood")

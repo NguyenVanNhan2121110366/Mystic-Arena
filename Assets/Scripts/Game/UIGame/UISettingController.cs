@@ -13,11 +13,13 @@ public class UISettingController : MonoBehaviour
     [SerializeField] private Button bntSetting;
     [SerializeField] private GameObject settingBar;
     [SerializeField] private GameObject fill;
+    private AllDotController allDots;
     private bool isCheckSetting;
     private InGameItem inGameItem;
 
     private void Awake()
     {
+        this.allDots = FindFirstObjectByType<AllDotController>();
         this.inGameItem = FindAnyObjectByType<InGameItem>();
         this.fill = GameObject.Find("Fill");
         this.bntHome = GameObject.Find("Home").GetComponent<Button>();
@@ -53,8 +55,21 @@ public class UISettingController : MonoBehaviour
 
     private void ClickHome()
     {
+        this.DestroyAllDot();
         SceneManager.LoadScene("Menu");
         Time.timeScale = 1;
+    }
+
+    public void DestroyAllDot()
+    {
+        for (var i = 0; i < this.allDots.Width; i++)
+        {
+            for (var j = 0; j < this.allDots.Height; j++)
+            {
+                Destroy(this.allDots.AllDots[i, j]);
+                this.allDots.AllDots[i, j] = null;
+            }
+        }
     }
 
     private void ClickResume()

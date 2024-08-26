@@ -61,16 +61,16 @@ public class UIMenu : MonoBehaviour
     private void ClickStart()
     {
         SceneManager.LoadScene("Game");
+        // this.checkContinue = true;
+        // this.SaveValueIsCheck(1, checkContinue);
         this.saveAllData.ResetData();
     }
 
     private void ClickContinue()
     {
-        if (SaveGame.Instance.saveData.scoreBlood[0] > 0)
+        if (SaveGame.Instance.saveData.isCheck[1])
         {
             SceneManager.LoadScene("Game");
-            this.checkContinue = true;
-            this.SaveValueIsCheck(1, checkContinue);
         }
         else
             return;
@@ -101,11 +101,11 @@ public class UIMenu : MonoBehaviour
         SaveGame.Instance.Save();
     }
 
-    private void SaveValueIsCheck(int value, bool nameCheck)
-    {
-        SaveGame.Instance.saveData.isCheck[value] = nameCheck;
-        SaveGame.Instance.Save();
-    }
+    // private void SaveValueIsCheck(int value, bool nameCheck)
+    // {
+    //     SaveGame.Instance.saveData.isCheck[value] = nameCheck;
+    //     SaveGame.Instance.Save();
+    // }
 
     private void ClickShop()
     {

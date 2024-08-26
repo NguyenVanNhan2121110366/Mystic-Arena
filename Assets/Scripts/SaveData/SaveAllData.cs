@@ -32,6 +32,7 @@ public class SaveAllData : MonoBehaviour
         SaveGame.Instance.saveData.scoreShield[0] = 0;
 
         SaveGame.Instance.saveData.currentLevel[0] = 0;
+        SaveGame.Instance.saveData.isCheck[1] = false;
         SaveGame.Instance.Save();
     }
     public void SaveAllDataGame()
@@ -74,4 +75,12 @@ public class SaveAllData : MonoBehaviour
         Player.Instance.CurrentScoreMana = SaveGame.Instance.saveData.scoreMana[0];
         Player.Instance.CurrentScoreShield = SaveGame.Instance.saveData.scoreShield[0];
     }
+
+    // public void LoadDataPlayerGameOver()
+    // {
+    //     SaveGame.Instance.Load();
+    //     Player.Instance.CurrentScoreHeal = Player.Instance.MaxScoreHeal;
+    //     Player.Instance.CurrentScoreMana = SaveGame.Instance.saveData.scoreMana[0];
+    //     Player.Instance.CurrentScoreShield = SaveGame.Instance.saveData.scoreShield[0];
+    // }
 }

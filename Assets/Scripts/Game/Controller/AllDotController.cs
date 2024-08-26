@@ -160,7 +160,9 @@ public class AllDotController : MonoBehaviour
         var dot = this.allDots[column, row];
         if (this.allDots[column, row].GetComponent<DotInteraction>().IsMatched)
         {
+
             this.SpawnDestroyEffects(column, row);
+
             // var effectDot = this.GetEffects(dot);
             // var position = dot.transform.position;
             Destroy(dot);

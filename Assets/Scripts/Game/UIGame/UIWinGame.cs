@@ -10,11 +10,13 @@ public class UIWinGame : MonoBehaviour
     [SerializeField] private GameObject description;
     [SerializeField] private GameObject backHome;
     [SerializeField] private Button bntBackHome;
+    private UISettingController uISettingController;
     private SaveAllData save;
     private SpawnEnemy spawnEnemy;
 
     private void Awake()
     {
+        this.uISettingController = FindAnyObjectByType<UISettingController>();
         this.bntBackHome = GameObject.Find("BackHome").GetComponent<Button>();
         this.backHome = GameObject.Find("BackHome");
         this.description = GameObject.Find("Descripttion");
@@ -31,6 +33,7 @@ public class UIWinGame : MonoBehaviour
 
     private void ClickHome()
     {
+        this.uISettingController.DestroyAllDot();
         this.spawnEnemy.CurrentLevel++;
         SaveGame.Instance.saveData.currentLevel[0] = this.spawnEnemy.CurrentLevel;
         SaveGame.Instance.Save();
