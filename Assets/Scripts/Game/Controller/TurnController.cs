@@ -20,52 +20,97 @@ public class TurnController : MonoBehaviour
     [SerializeField] private GameTurn currentTurn;
     [SerializeField] private int turn;
     private EnemyAI enemyAI;
-    [SerializeField] private TextMeshProUGUI txtTurn;
-    [SerializeField] private GameObject bgrTextTurn;
+    [SerializeField] private TextMeshProUGUI txtTurnPlayer;
+    [SerializeField] private GameObject bgrTextTurnPlayer;
+    [SerializeField] private TextMeshProUGUI txtTurnEnemy;
+    [SerializeField] private GameObject bgrTextTurnEnemy;
     [SerializeField] private int seconds;
-    [SerializeField] private GameObject backGroundSeconds;
-    [SerializeField] private TextMeshProUGUI txtSeconds;
+    [SerializeField] private TextMeshProUGUI txtSecondsPlayer;
+    [SerializeField] private GameObject bgrSecondsPlayer;
+    [SerializeField] private TextMeshProUGUI txtSecondsEnemy;
+    [SerializeField] private GameObject bgrSecondsEnemy;
 
     private bool isCheck;
     public GameTurn CurrentTurn { get => currentTurn; set => currentTurn = value; }
 
     private void Awake()
     {
-        this.bgrTextTurn = GameObject.Find("BackGroundTurn");
-        this.txtTurn = GameObject.Find("txtTurn").GetComponent<TextMeshProUGUI>();
+        this.bgrSecondsPlayer = GameObject.Find("BackGroundSecondsTurnPlayer");
+        this.bgrSecondsEnemy = GameObject.Find("BackGroundSecondsTurnEnemy");
+        this.txtSecondsPlayer = GameObject.Find("txtSecondsPlayer").GetComponent<TextMeshProUGUI>();
+        this.txtSecondsEnemy = GameObject.Find("txtSecondsEnemy").GetComponent<TextMeshProUGUI>();
+        this.bgrTextTurnPlayer = GameObject.Find("BackGroundTurnPlayer");
+        this.txtTurnPlayer = GameObject.Find("txtTurnPlayer").GetComponent<TextMeshProUGUI>();
+        this.bgrTextTurnEnemy = GameObject.Find("BackGroundTurnEnemy");
+        this.txtTurnEnemy = GameObject.Find("txtTurnEnemy").GetComponent<TextMeshProUGUI>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         this.isCheck = true;
-        this.bgrTextTurn.SetActive(false);
         currentTurn = GameTurn.Player;
         this.turn = 1;
         this.seconds = 10;
+        StartCoroutine(DelayTurn());
         StartCoroutine(this.CheckSecondsTurn());
+    }
+
+    private IEnumerator DelayTurn()
+    {
+        this.bgrTextTurnPlayer.SetActive(true);
+        this.bgrTextTurnEnemy.SetActive(false);
+        yield return new WaitForSeconds(2f);
+        this.bgrTextTurnPlayer.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        this.SecondTurn();
     }
-    private IEnumerator TextTurn()
+
+    private void SecondTurn()
     {
         if (currentTurn == GameTurn.Player)
         {
-            yield return new WaitForSeconds(0.3f);
-            this.bgrTextTurn.SetActive(true);
-            this.txtTurn.text = "Lượt của Enemy";
-            Debug.Log("Turn of Enemy");
+            this.bgrSecondsPlayer.SetActive(true);
+            this.bgrSecondsEnemy.SetActive(false);
+            this.txtSecondsPlayer.text = this.seconds.ToString();
         }
         else
         {
-            yield return new WaitForSeconds(0.3f);
-            this.bgrTextTurn.SetActive(true);
-            this.txtTurn.text = "Lượt của Player";
-            Debug.Log("Turn of Player");
+            this.bgrSecondsEnemy.SetActive(true);
+            this.bgrSecondsPlayer.SetActive(false);
+            this.txtSecondsEnemy.text = this.seconds.ToString();
+        }
+    }
+    private IEnumerator TextTurn()
+    {
+
+        if (currentTurn == GameTurn.Player)
+        {
+            if (Player.Instance.CurrentScoreHeal > 0)
+            {
+                yield return new WaitForSeconds(0.3f);
+                this.bgrTextTurnPlayer.SetActive(true);
+                this.txtTurnPlayer.text = "Lượt của Enemy";
+                Debug.Log("Turn of Enemy");
+                yield return new WaitForSeconds(2f);
+                this.bgrTextTurnPlayer.SetActive(false);
+            }
+        }
+        else
+        {
+            if (Enemy.Instance.CurrentScoreHeal > 0)
+            {
+                yield return new WaitForSeconds(0.3f);
+                this.bgrTextTurnEnemy.SetActive(true);
+                this.txtTurnEnemy.text = "Lượt của Player";
+                Debug.Log("Turn of Player");
+                yield return new WaitForSeconds(2f);
+                this.bgrTextTurnEnemy.SetActive(false);
+            }
         }
     }
 
@@ -74,14 +119,18 @@ public class TurnController : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(1f);
-            this.MinusSeconds(1);
+            if (GameStateController.Instance.CurrentGameState == GameState.Swipe || GameStateController.Instance.CurrentGameState == GameState.CheckingDot)
+                this.MinusSeconds(1);
             if (seconds == 0 && isCheck)
             {
-                isCheck = false;
-                GameStateController.Instance.CurrentGameState = GameState.Finish;
-                yield return null;
-                this.seconds = 10;
-                isCheck = true;
+                if (GameStateController.Instance.CurrentGameState == GameState.Swipe)
+                {
+                    isCheck = false;
+                    GameStateController.Instance.CurrentGameState = GameState.Finish;
+                    yield return null;
+                    this.seconds = 10;
+                    isCheck = true;
+                }
             }
         }
 

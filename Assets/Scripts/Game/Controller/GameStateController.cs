@@ -33,14 +33,6 @@ public class GameStateController : MonoBehaviour
     {
         if (currentGameState == GameState.Finish)
         {
-            // if (TurnController.Instance.CurrentTurn == GameTurn.Player)
-            // {
-            //     Player.Instance.ResetScore();
-            // }
-            // if (TurnController.Instance.CurrentTurn == GameTurn.Enemy)
-            // {
-            //     Enemy.Instance.ResetScore();
-            // }
             currentGameState = GameState.Swipe;
             StartCoroutine(TurnController.Instance.CheckTurnAndSwitch());
             this.scoreController.ResetScore();
