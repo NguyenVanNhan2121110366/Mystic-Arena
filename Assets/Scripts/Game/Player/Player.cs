@@ -55,12 +55,12 @@ public class Player : Character
         this.rotationPlayer = transform.rotation;
         this.posPlayer = transform.position;
         this.CurrentGold = 0;
-        // if (SaveGame.Instance.saveData.isCheck[1])
-        // {
-        //     this.saveAllData.LoadDataPlayer();
-        //     // SaveGame.Instance.saveData.isCheck[1] = false;
-        //     SaveGame.Instance.Save();
-        // }
+        if (SaveGame.Instance.saveData.isCheck[1] && SaveGame.Instance.saveData.currentLevel[0] > 0)
+        {
+            this.saveAllData.LoadDataPlayer();
+            // // SaveGame.Instance.saveData.isCheck[1] = false;
+            // SaveGame.Instance.Save();
+        }
     }
 
     // Update is called once per frame

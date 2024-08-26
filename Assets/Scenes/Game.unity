@@ -10430,7 +10430,7 @@ MonoBehaviour:
   currentScoreAttack: 0
   currentScoreGold: 0
   currentScoreShield: 0
-  maxScoreHeal: 100
+  maxScoreHeal: 500
   maxScoreMana: 500
   maxScoreAttack: 0
   maxScoreGold: 0

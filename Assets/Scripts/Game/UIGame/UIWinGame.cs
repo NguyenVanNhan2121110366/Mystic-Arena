@@ -33,6 +33,8 @@ public class UIWinGame : MonoBehaviour
 
     private void ClickHome()
     {
+        SaveGame.Instance.saveData.isCheck[1] = true;
+        SaveGame.Instance.Save();
         this.uISettingController.DestroyAllDot();
         this.spawnEnemy.CurrentLevel++;
         SaveGame.Instance.saveData.currentLevel[0] = this.spawnEnemy.CurrentLevel;

@@ -55,6 +55,8 @@ public class UISettingController : MonoBehaviour
 
     private void ClickHome()
     {
+        SaveGame.Instance.saveData.isCheck[1] = true;
+        SaveGame.Instance.Save();
         this.DestroyAllDot();
         SceneManager.LoadScene("Menu");
         Time.timeScale = 1;

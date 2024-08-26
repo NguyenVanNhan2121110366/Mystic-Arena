@@ -27,10 +27,12 @@ public class UIGameOver : MonoBehaviour
     private void ClickHome()
     {
         SaveGame.Instance.saveData.isCheck[1] = true;
+        SaveGame.Instance.Save();
         this.uISettingController.DestroyAllDot();
         this.save.SaveDataGoldPlayer();
         Time.timeScale = 1;
         SceneManager.LoadScene("Menu");
+        
     }
 
     private void ClickRestart()
