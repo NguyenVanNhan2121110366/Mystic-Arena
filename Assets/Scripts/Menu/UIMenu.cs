@@ -18,6 +18,9 @@ public class UIMenu : MonoBehaviour
     [SerializeField] private GameObject objVolume;
     [SerializeField] private GameObject objVolumeOff;
     [SerializeField] private AudioSource audioSource;
+    [SerializeField] private GameObject objFillNote;
+    [SerializeField] private Button bntNote;
+    [SerializeField] private Button bntFillExit;
 
     private SaveAllData saveAllData;
 
@@ -25,6 +28,10 @@ public class UIMenu : MonoBehaviour
 
     private void Awake()
     {
+        //GetComponent
+        this.bntFillExit = GameObject.Find("BntExit").GetComponent<Button>();
+        this.objFillNote = GameObject.Find("NoteObj");
+        this.bntNote = GameObject.Find("bntNote").GetComponent<Button>();
         this.saveAllData = FindFirstObjectByType<SaveAllData>();
         this.objVolume = GameObject.Find("Volume");
         this.objVolumeOff = GameObject.Find("VolumeOff");
@@ -37,6 +44,8 @@ public class UIMenu : MonoBehaviour
         this.bntVolume = GameObject.Find("Volume").GetComponent<Button>();
         this.bntExit = GameObject.Find("Exit").GetComponent<Button>();
         this.bntVolumeOff = GameObject.Find("VolumeOff").GetComponent<Button>();
+
+        //Check click button
         this.bntStart.onClick.AddListener(ClickStart);
         this.bntShop.onClick.AddListener(ClickShop);
         this.bntShopItem.onClick.AddListener(ClickShopItem);
@@ -45,6 +54,8 @@ public class UIMenu : MonoBehaviour
         this.bntVolumeOff.onClick.AddListener(ClickVolumeOff);
         this.bntExit.onClick.AddListener(ClickExit);
         this.bntShopSkill.onClick.AddListener(this.ClickShopSkill);
+        this.bntNote.onClick.AddListener(this.ClickNote);
+        this.bntFillExit.onClick.AddListener(this.ClickFillExit);
     }
     private void Start()
     {
@@ -56,13 +67,11 @@ public class UIMenu : MonoBehaviour
         this.chooseShop.SetActive(false);
         this.checkContinue = false;
         this.checkNewGame = false;
-        //this.objVolumeOff.SetActive(false);
+        this.objFillNote.SetActive(false);
     }
     private void ClickStart()
     {
         SceneManager.LoadScene("Game");
-        // this.checkContinue = true;
-        // this.SaveValueIsCheck(1, checkContinue);
         this.saveAllData.ResetData();
     }
 
@@ -101,12 +110,6 @@ public class UIMenu : MonoBehaviour
         SaveGame.Instance.Save();
     }
 
-    // private void SaveValueIsCheck(int value, bool nameCheck)
-    // {
-    //     SaveGame.Instance.saveData.isCheck[value] = nameCheck;
-    //     SaveGame.Instance.Save();
-    // }
-
     private void ClickShop()
     {
         SoundManager.Instance.audioSrc.PlayOneShot(SoundManager.Instance.SoundClick);
@@ -114,7 +117,6 @@ public class UIMenu : MonoBehaviour
         {
             this.chooseShop.SetActive(false);
             this.checkChooseShop = false;
-
         }
         else
         {
@@ -131,6 +133,16 @@ public class UIMenu : MonoBehaviour
     private void ClickShopSkill()
     {
         SceneManager.LoadScene("ShopSkill");
+    }
+
+    private void ClickNote()
+    {
+        this.objFillNote.SetActive(true);
+    }
+
+    private void ClickFillExit()
+    {
+        this.objFillNote.SetActive(false);
     }
     private void ClickExit()
     {

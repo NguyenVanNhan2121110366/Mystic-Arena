@@ -46,13 +46,6 @@ public class AllDotController : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-
 
     private IEnumerator CreateDotAndGrid()
     {
@@ -162,14 +155,8 @@ public class AllDotController : MonoBehaviour
         {
 
             this.SpawnDestroyEffects(column, row);
-
-            // var effectDot = this.GetEffects(dot);
-            // var position = dot.transform.position;
             Destroy(dot);
             this.allDots[column, row] = null;
-            // var objEffect = Instantiate(allEffects[effectDot], position, Quaternion.identity);
-            // Destroy(objEffect, 1f);
-
         }
     }
 
@@ -244,7 +231,7 @@ public class AllDotController : MonoBehaviour
         }
     }
 
-    private bool IsCheckMached()
+    private bool IsCheckMatched()
     {
         for (var i = 0; i < this.width; i++)
         {
@@ -263,7 +250,7 @@ public class AllDotController : MonoBehaviour
     {
         StartCoroutine(this.SpawnAgain());
         yield return new WaitForSeconds(0.3f);
-        if (IsCheckMached())
+        if (IsCheckMatched())
         {
             SoundManager.Instance.audioSrc.PlayOneShot(SoundManager.Instance.SoundContinuousDestruction);
             StartCoroutine(DestroyMatched());

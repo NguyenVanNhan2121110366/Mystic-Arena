@@ -71,8 +71,6 @@ public class Character : MonoBehaviour
 
         currentScoreShield += scoreShield;
 
-
-
     }
 
     public virtual void UpdateScore()
