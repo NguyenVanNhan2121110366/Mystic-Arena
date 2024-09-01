@@ -3777,7 +3777,7 @@ GameObject:
   - component: {fileID: 2091894986}
   - component: {fileID: 2091894985}
   m_Layer: 5
-  m_Name: BntExit
+  m_Name: BntObjExit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

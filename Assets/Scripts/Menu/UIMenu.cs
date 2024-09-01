@@ -29,7 +29,7 @@ public class UIMenu : MonoBehaviour
     private void Awake()
     {
         //GetComponent
-        this.bntFillExit = GameObject.Find("BntExit").GetComponent<Button>();
+        this.bntFillExit = GameObject.Find("BntObjExit").GetComponent<Button>();
         this.objFillNote = GameObject.Find("NoteObj");
         this.bntNote = GameObject.Find("bntNote").GetComponent<Button>();
         this.saveAllData = FindFirstObjectByType<SaveAllData>();
