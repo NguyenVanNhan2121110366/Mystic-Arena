@@ -85,6 +85,7 @@ public class UISettingController : MonoBehaviour
 
     private void ClickRestart()
     {
+        this.DestroyAllDot();
         SoundManager.Instance.audioSrc.PlayOneShot(SoundManager.Instance.SoundClick);
         this.fill.SetActive(false);
         this.settingBar.SetActive(false);

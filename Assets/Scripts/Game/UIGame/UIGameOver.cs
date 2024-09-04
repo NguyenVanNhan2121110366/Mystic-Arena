@@ -37,6 +37,7 @@ public class UIGameOver : MonoBehaviour
 
     private void ClickRestart()
     {
+        this.uISettingController.DestroyAllDot();
         SoundManager.Instance.audioSrc.PlayOneShot(SoundManager.Instance.SoundClick);
         if (SaveGame.Instance.saveData.scoreBlood[1] > 0)
         {
@@ -50,6 +51,5 @@ public class UIGameOver : MonoBehaviour
             Time.timeScale = 1;
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
-
     }
 }

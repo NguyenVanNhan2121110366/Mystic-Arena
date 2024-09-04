@@ -137,11 +137,13 @@ public class UIMenu : MonoBehaviour
 
     private void ClickNote()
     {
+        SoundManager.Instance.audioSrc.PlayOneShot(SoundManager.Instance.SoundClick);
         this.objFillNote.SetActive(true);
     }
 
     private void ClickFillExit()
     {
+        SoundManager.Instance.audioSrc.PlayOneShot(SoundManager.Instance.SoundClick);
         this.objFillNote.SetActive(false);
     }
     private void ClickExit()
